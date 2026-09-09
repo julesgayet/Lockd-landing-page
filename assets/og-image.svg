@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0B0F1A"/>
+      <stop offset="1" stop-color="#131A2A"/>
+    </linearGradient>
+    <linearGradient id="mark" x1="0" y1="0" x2="120" y2="120" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#4F46E5"/>
+      <stop offset="1" stop-color="#38BDF8"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.2" cy="0.15" r="0.8">
+      <stop offset="0" stop-color="#4F46E5" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#4F46E5" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <rect x="90" y="90" width="120" height="120" rx="34" fill="url(#mark)"/>
+  <path d="M165 118a39 39 0 1 0 10.5 56" stroke="#fff" stroke-width="8" stroke-linecap="round" fill="none"/>
+  <path d="M124 158l17 17 30-29" stroke="#fff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <text x="90" y="330" font-family="Arial, sans-serif" font-size="72" font-weight="800" fill="#ffffff">Engage ta parole.</text>
+  <text x="90" y="410" font-family="Arial, sans-serif" font-size="72" font-weight="800" fill="#ffffff">Et ton argent.</text>
+  <text x="90" y="470" font-family="Arial, sans-serif" font-size="28" fill="#A6AFCB">Lockd — l'app qui t'aide à tenir tes objectifs. Bientôt sur iOS.</text>
+</svg>

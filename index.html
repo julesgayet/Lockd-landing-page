@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Lockd : engage ta parole. Et ton argent.</title>
+<meta name="description" content="Lockd : fixe un objectif, engage une somme, prouve-le en photo. Tenu, tu ne perds rien. Raté, la mise est débitée, et une partie va à l'association de ton choix. Disponible sur iOS." />
+
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css" />
+
+<!-- Open Graph -->
+<meta property="og:title" content="Lockd : engage ta parole. Et ton argent." />
+<meta property="og:description" content="L'app qui t'aide à tenir tes objectifs : mise de l'argent dessus, prouve-le en photo, ou perds ta mise." />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="assets/og-image.svg" />
+</head>
+<body>
+
+<!-- ================= NAV ================= -->
+<header class="nav" id="top">
+  <div class="container nav__inner">
+    <a href="#top" class="brand">
+      <span class="brand__mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="32" height="32">
+          <defs>
+            <linearGradient id="navLogoGrad" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#4F46E5"/>
+              <stop offset="1" stop-color="#38BDF8"/>
+            </linearGradient>
+          </defs>
+          <rect width="32" height="32" rx="9" fill="url(#navLogoGrad)"/>
+          <path d="M20.2 11.4A5.2 5.2 0 1 0 21.6 18.9" stroke="#fff" stroke-width="2.1" stroke-linecap="round" fill="none"/>
+          <path d="M14.6 16.4l2.3 2.3 4-3.9" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </svg>
+      </span>
+      <span class="brand__name">Lockd</span>
+    </a>
+
+    <nav class="nav__links" id="navPill" aria-label="Navigation principale">
+      <span class="nav__cursor" aria-hidden="true"></span>
+      <a href="#comment">Comment ça marche</a>
+      <a href="#objectifs">Objectifs</a>
+      <a href="#confiance">Confiance</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+
+    <a href="#top" class="btn btn--primary btn--sm nav__cta">Télécharger l'app</a>
+
+    <button class="nav__burger" id="burgerBtn" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <div class="nav__mobile" id="mobileMenu">
+    <a href="#comment">Comment ça marche</a>
+    <a href="#objectifs">Objectifs</a>
+    <a href="#confiance">Confiance</a>
+    <a href="#faq">FAQ</a>
+    <a href="#top" class="btn btn--primary">Télécharger l'app</a>
+  </div>
+</header>
+
+<main>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="hero__glow" aria-hidden="true"></div>
+  <div class="container hero__inner">
+    <div class="hero__copy">
+      <p class="eyebrow"><span class="eyebrow__dot"></span> Disponible sur iOS</p>
+      <h1>Engage ta parole.<br>Et ton argent.</h1>
+      <p class="hero__rotating">
+        <span>Un vrai enjeu pour</span>
+        <span class="rotating-pill"><span class="rotating-pill__word" id="rotatingWord">la salle de sport</span></span>
+      </p>
+      <p class="hero__lead">
+        Lockd t'aide à tenir tes objectifs en y mettant un vrai enjeu. Tu fixes
+        un objectif vérifiable, tu engages une somme dessus, tu prouves que tu
+        l'as tenu par une photo. <strong>Réussi, tu ne perds rien.</strong>
+        Raté, la mise est en partie reversée à une association que tu choisis.
+      </p>
+
+      <div class="store-badges">
+        <a href="https://apps.apple.com/" target="_blank" rel="noopener" class="store-badge">
+          <svg class="store-badge__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.5 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.82M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11"/></svg>
+          <span class="store-badge__text"><small>Télécharger sur l'</small><strong>App Store</strong></span>
+        </a>
+      </div>
+      <p class="waitlist-note">Gratuit à télécharger. Aucune carte requise avant ta première mise.</p>
+
+      <div class="hero__trust">
+        <div class="hero__trust-item">
+          <svg viewBox="0 0 20 20" width="18" height="18" fill="none"><path d="M4 10.5l3.8 3.8L16 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Paiements sécurisés par Stripe
+        </div>
+        <div class="hero__trust-item">
+          <svg viewBox="0 0 20 20" width="18" height="18" fill="none"><path d="M4 10.5l3.8 3.8L16 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Données hébergées en UE
+        </div>
+      </div>
+    </div>
+
+    <div class="hero__visual" aria-hidden="true">
+      <div class="phone-stack">
+        <div class="phone phone--front">
+          <div class="phone__notch"></div>
+          <div class="phone__statusbar"><span>9:41</span><span class="statusbar__icons">•••</span></div>
+          <div class="phone__screen phone__screen--empty">
+            <span class="phone__empty-icon">📱</span>
+            <p class="phone__empty-text">En attente de l'application</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= COMMENT ÇA MARCHE ================= -->
+<section class="section" id="comment">
+  <div class="container">
+    <div class="section__head">
+      <p class="kicker">Comment ça marche</p>
+      <h2>Quatre étapes. Zéro excuse.</h2>
+      <p class="section__lead">Le principe d'un commitment device : quand l'argent est en jeu, la motivation n'a plus besoin d'être parfaite un lundi matin à 6h.</p>
+    </div>
+
+    <div class="steps__timeline" id="stepsTimeline" aria-hidden="true">
+      <span class="steps__dot"></span>
+      <span class="steps__seg"></span>
+      <span class="steps__dot"></span>
+      <span class="steps__seg"></span>
+      <span class="steps__dot"></span>
+      <span class="steps__seg steps__seg--fade"></span>
+      <span class="steps__dot"></span>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step__num">01</div>
+        <h3>Tu choisis tes jours et ton heure</h3>
+        <p>Salle de sport, lever tôt, repas fait maison... Tu choisis l'objectif, les jours qui t'engagent sur les 7 prochains jours (ex. 3 séances sur 7), et l'heure du contrôle, modifiable à tout moment jusqu'au matin même.</p>
+      </div>
+      <div class="step">
+        <div class="step__num">02</div>
+        <h3>Tu engages une somme</h3>
+        <p>Tu fixes le montant (jusqu'à 100 € par objectif), tu confirmes en un tap. Ta carte est enregistrée une seule fois, aucune re-saisie ensuite.</p>
+      </div>
+      <div class="step">
+        <div class="step__num">03</div>
+        <h3>Une notification, une photo</h3>
+        <p>Des rappels t'avertissent avant l'échéance que tu as toi-même fixée. À l'heure pile, tu as 15 minutes pour ouvrir la caméra intégrée et prouver : pas de galerie, pas de triche, seul le direct compte.</p>
+      </div>
+      <div class="step">
+        <div class="step__num">04</div>
+        <h3>Tenu ou raté, c'est réglé tout de suite</h3>
+        <p>Ta preuve est vérifiée en quelques secondes. Tenu : rien ne bouge. Raté et non contesté : la mise est débitée dans l'heure, une partie part à ton association.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CATALOGUE OBJECTIFS ================= -->
+<section class="section section--tint" id="objectifs">
+  <div class="container">
+    <div class="section__head">
+      <p class="kicker">Le catalogue</p>
+      <h2>Seulement ce qui peut vraiment se prouver</h2>
+      <p class="section__lead">Pas de « arrête de fumer » ou « sois gentil » : invérifiables. Chaque objectif du catalogue a une preuve nette : photo, lieu, horodatage serveur.</p>
+    </div>
+
+    <div class="goal-grid">
+      <div class="goal-tile tilt"><span class="goal-tile__icon">🏋️</span><h4>Salle de sport</h4><p>Géolocalisation + photo sur place, à l'heure que tu as fixée.</p></div>
+      <div class="goal-tile tilt"><span class="goal-tile__icon">🌅</span><h4>Se lever tôt</h4><p>Photo extérieure entre 6h et 8h. Impossible à préparer la veille.</p></div>
+      <div class="goal-tile tilt"><span class="goal-tile__icon">🍳</span><h4>Repas fait maison</h4><p>Photo de l'assiette à chaque repas. L'IA repère un plat de resto.</p></div>
+      <div class="goal-tile tilt"><span class="goal-tile__icon">🚶</span><h4>Marche quotidienne</h4><p>Nombre de pas relevé via Apple Santé, complété d'une photo dehors.</p></div>
+      <div class="goal-tile tilt"><span class="goal-tile__icon">🛏️</span><h4>Lit fait</h4><p>Photo de la chambre le matin. Simple, net, peu de triche possible.</p></div>
+      <div class="goal-tile tilt"><span class="goal-tile__icon">📓</span><h4>Pages écrites</h4><p>Photo de la page du jour. L'IA compare aux preuves précédentes.</p></div>
+      <div class="goal-tile tilt"><span class="goal-tile__icon">📈</span><h4>Photo de progression</h4><p>Même pose, même cadrage, chaque semaine, pour ton propre avant/après.</p></div>
+      <div class="goal-tile tilt"><span class="goal-tile__icon">🏊</span><h4>Piscine / escalade / club</h4><p>Géofence sur le lieu + photo sur place, à l'heure de la séance.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= POURQUOI ÇA MARCHE ================= -->
+<section class="section" id="pourquoi">
+  <div class="container why__grid">
+    <div class="why__copy">
+      <p class="kicker">Pourquoi ça marche</p>
+      <h2>Perdre 20 € fait plus mal qu'en gagner 20 ne fait plaisir</h2>
+      <p class="section__lead">C'est l'aversion à la perte : à somme égale, la peur de perdre pèse plus lourd dans nos décisions que l'espoir de gagner. Lockd retourne ce biais contre la procrastination : au lieu de compter sur la seule volonté, l'enjeu financier fait le travail à ta place.</p>
+      <ul class="why__list">
+        <li><strong>Un vrai engagement, pas juste une case cochée.</strong> Quand une somme d'argent est réellement en jeu, l'objectif cesse d'être négociable avec soi-même.</li>
+        <li><strong>Ton argent, jamais celui d'un autre joueur.</strong> Aucun hasard, aucun gain possible : soit tu gardes ta mise, soit elle part, en partie, à une cause que tu as choisie.</li>
+        <li><strong>C'est toi qui fixes l'heure, mais elle est ferme.</strong> Une fois l'échéance choisie, un compte à rebours de 15 minutes s'enclenche pile à cette heure : la seule option qui reste est de tenir l'objectif, pas de le repousser.</li>
+      </ul>
+    </div>
+    <div class="why__visual" aria-hidden="true">
+      <div class="stat-card">
+        <p class="stat-card__value">98&nbsp;%</p>
+        <p class="stat-card__label">des preuves validées automatiquement par l'IA, en quelques secondes</p>
+      </div>
+      <div class="stat-card stat-card--alt">
+        <p class="stat-card__value">100&nbsp;€</p>
+        <p class="stat-card__label">plafond maximum par objectif, ajustable dans ton profil</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-card__value">Rien ne se perd</p>
+        <p class="stat-card__label">une partie de chaque mise ratée part à l'association de ton choix, jamais dans le vide</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONFIANCE ================= -->
+<section class="section" id="confiance">
+  <div class="container">
+    <div class="section__head">
+      <p class="kicker">Confiance &amp; sécurité</p>
+      <h2>On ne débite jamais sur un doute</h2>
+      <p class="section__lead">C'est la règle absolue du système : toute ambiguïté part en revue, jamais en débit automatique. Voici comment c'est tenu, techniquement.</p>
+    </div>
+
+    <div class="trust-grid">
+      <div class="trust-card tilt">
+        <div class="trust-card__icon">📷</div>
+        <h4>Caméra uniquement</h4>
+        <p>Aucun import depuis la photothèque. La seule preuve possible est prise en direct, dans l'app.</p>
+      </div>
+      <div class="trust-card tilt">
+        <div class="trust-card__icon">⏱️</div>
+        <h4>Une heure fixée par toi, mais ferme</h4>
+        <p>Tu choisis l'échéance à la création de l'objectif, modifiable jusqu'au matin même. Une fois passée, tu as 15 minutes pour prouver.</p>
+      </div>
+      <div class="trust-card tilt">
+        <div class="trust-card__icon">🧠</div>
+        <h4>Vérification par IA</h4>
+        <p>Un modèle de vision analyse chaque preuve. En cas de doute, ou si tu contestes le verdict, un examen a lieu avant tout débit.</p>
+      </div>
+      <div class="trust-card tilt">
+        <div class="trust-card__icon">🔒</div>
+        <h4>Consentement horodaté</h4>
+        <p>Chaque mise est confirmée explicitement, jamais pré-cochée. Historique consultable à tout moment.</p>
+      </div>
+      <div class="trust-card tilt">
+        <div class="trust-card__icon">💳</div>
+        <h4>Paiement par Stripe</h4>
+        <p>Ta carte ne transite jamais par nos serveurs. Tu fixes tes propres plafonds dans ton profil, dans la limite de 100 € par objectif.</p>
+      </div>
+      <div class="trust-card tilt">
+        <div class="trust-card__icon">🇪🇺</div>
+        <h4>Données hébergées en UE</h4>
+        <p>Conforme RGPD, minimisation des données, conservation courte des photos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section class="section section--tint" id="faq">
+  <div class="container container--narrow">
+    <div class="section__head">
+      <p class="kicker">FAQ</p>
+      <h2>Les questions qu'on nous pose tout de suite</h2>
+    </div>
+
+    <div class="faq-list">
+      <details class="faq-item" open>
+        <summary>Est-ce un jeu d'argent ?</summary>
+        <div class="faq-item__body"><p>Non. Il n'y a aucun hasard et aucun gain espéré : tu ne peux jamais gagner plus que ce que tu as engagé. Tu perds ta mise uniquement si tu ne tiens pas un objectif que tu as toi-même choisi et confirmé.</p></div>
+      </details>
+      <details class="faq-item">
+        <summary>Qui reçoit l'argent des mises perdues ?</summary>
+        <div class="faq-item__body"><p>Une partie est reversée à l'association de ton choix, sélectionnée dans l'app. Le reste finance la plateforme, et c'est affiché en clair avant chaque mise, pas caché dans les conditions générales.</p></div>
+      </details>
+      <details class="faq-item">
+        <summary>Et si je pense que la preuve a été mal jugée ?</summary>
+        <div class="faq-item__body"><p>Les cas ambigus partent automatiquement en revue avant tout débit. Tu peux aussi signaler toi-même un verdict qui te semble injuste, pour qu'il soit réexaminé.</p></div>
+      </details>
+      <details class="faq-item">
+        <summary>Puis-je me faire rembourser si j'ai raté ?</summary>
+        <div class="faq-item__body"><p>Non, sauf cas exceptionnel : dès qu'un objectif est constaté raté, le débit intervient immédiatement ou dans l'heure. Mieux vaut viser un objectif réellement tenable plutôt qu'ambitieux.</p></div>
+      </details>
+      <details class="faq-item">
+        <summary>Quand l'app est-elle disponible ?</summary>
+        <div class="faq-item__body"><p>Lockd est disponible dès maintenant, à télécharger gratuitement sur l'App Store.</p></div>
+      </details>
+      <details class="faq-item">
+        <summary>Qu'advient-il de mes photos ?</summary>
+        <div class="faq-item__body"><p>Elles servent uniquement à vérifier l'objectif, sont hébergées en UE et conservées sur une durée courte, jamais revendues, jamais utilisées à d'autres fins.</p></div>
+      </details>
+      <details class="faq-item">
+        <summary>Pourquoi seulement sur iPhone ?</summary>
+        <div class="faq-item__body"><p>Lockd s'appuie à fond sur les capteurs de l'iPhone : caméra pour la preuve en direct, Apple Santé pour les pas, géolocalisation et Screen Time. Rester sur un seul écosystème permet de les exploiter pleinement.</p></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section class="cta" id="contact">
+  <div class="cta__glow" aria-hidden="true"></div>
+  <div class="container cta__inner">
+    <h2>Une question, une proposition ?</h2>
+    <p>Idée de fonctionnalité, partenariat avec une association, bug repéré, ou simple question : écris-nous directement, on lit tout.</p>
+
+    <a href="mailto:jules.gayet12@gmail.com" class="btn btn--light contact__mail">
+      <svg viewBox="0 0 20 20" width="18" height="18" fill="none" aria-hidden="true"><path d="M3 5.5h14a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-7a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="m3 6 7 5 7-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Nous contacter
+    </a>
+  </div>
+</section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+  <div class="container footer__inner">
+    <div class="footer__brand">
+      <a href="#top" class="brand">
+        <span class="brand__mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32" width="28" height="28">
+            <defs>
+              <linearGradient id="footLogoGrad" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+                <stop offset="0" stop-color="#4F46E5"/>
+                <stop offset="1" stop-color="#38BDF8"/>
+              </linearGradient>
+            </defs>
+            <rect width="32" height="32" rx="9" fill="url(#footLogoGrad)"/>
+            <path d="M20.2 11.4A5.2 5.2 0 1 0 21.6 18.9" stroke="#fff" stroke-width="2.1" stroke-linecap="round" fill="none"/>
+            <path d="M14.6 16.4l2.3 2.3 4-3.9" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+        </span>
+        <span class="brand__name">Lockd</span>
+      </a>
+      <p class="footer__tagline">On ne laisse plus jamais rien tomber.</p>
+    </div>
+
+    <div class="footer__cols">
+      <div class="footer__col">
+        <p class="footer__colTitle">Produit</p>
+        <a href="#comment">Comment ça marche</a>
+        <a href="#objectifs">Objectifs</a>
+        <a href="#confiance">Confiance &amp; sécurité</a>
+      </div>
+      <div class="footer__col">
+        <p class="footer__colTitle">Ressources</p>
+        <a href="#faq">FAQ</a>
+        <a href="#top">Télécharger</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="footer__col">
+        <p class="footer__colTitle">Légal</p>
+        <a href="#" data-placeholder="true">Conditions d'utilisation</a>
+        <a href="#" data-placeholder="true">Politique de confidentialité</a>
+      </div>
+    </div>
+  </div>
+  <div class="container footer__bottom">
+    <p>© <span id="year"></span> Lockd. Tous droits réservés.</p>
+    <p class="footer__note">Lockd n'est pas un jeu d'argent : aucun hasard, aucun gain possible au-delà de la mise engagée.</p>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
