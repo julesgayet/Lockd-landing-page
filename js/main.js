@@ -58,11 +58,10 @@ document.addEventListener('DOMContentLoaded', () => {
   if (rotatingWord && !reduced) {
     const words = [
       'la salle de sport',
-      'le lever tôt',
+      'se lever tôt',
       'les repas faits maison',
       'la marche quotidienne',
-      'le lit fait',
-      'les pages écrites',
+      'un mode de vie sain !'
     ];
     let i = 0;
     setInterval(() => {

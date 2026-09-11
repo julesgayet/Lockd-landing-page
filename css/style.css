@@ -130,15 +130,16 @@ img, svg { display: block; }
 /* ============ Nav ============ */
 .nav {
   position: fixed;
-  top: 0;
+  top: 16px;
   left: 0;
   right: 0;
   z-index: 100;
   background: transparent;
   border-bottom: 1px solid transparent;
-  transition: background .3s ease, border-color .3s ease, backdrop-filter .3s ease;
+  transition: background .3s ease, border-color .3s ease, backdrop-filter .3s ease, top .3s ease;
 }
 .nav--scrolled {
+  top: 0;
   background: rgba(255,255,255,0.72);
   backdrop-filter: blur(14px) saturate(1.4);
   -webkit-backdrop-filter: blur(14px) saturate(1.4);
@@ -166,6 +167,7 @@ img, svg { display: block; }
   transition: color .3s ease;
 }
 .nav--scrolled .brand__name { color: var(--ink-900); }
+.brand__name--lg { font-size: 24px; }
 .nav__links {
   position: relative;
   display: flex;
@@ -335,27 +337,41 @@ img, svg { display: block; }
   gap: 12px;
 }
 .store-badge {
+  display: inline-flex;
+  align-self: flex-start;
+  transition: transform .18s ease;
+}
+.store-badge:hover { transform: translateY(-2px); }
+.store-badge img { height: 58px; width: auto; display: block; border-radius: 12px; }
+
+.auth-buttons {
   display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+  gap: 4px;
+  height: 58px;
+}
+.auth-btn {
+  flex: 1;
+  display: inline-flex;
   align-items: center;
-  gap: 10px;
-  padding: 10px 18px;
-  border-radius: 14px;
-  background: #000;
-  border: 1px solid rgba(255,255,255,0.16);
+  justify-content: center;
+  padding: 0 16px;
+  border-radius: 8px;
+  font-size: 12.5px;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: transform .15s ease, opacity .15s ease;
+}
+.auth-btn:hover { transform: translateY(-1px); }
+.auth-btn--primary {
+  background: linear-gradient(135deg, var(--brand-start), var(--brand-end));
   color: #fff;
-  transition: transform .18s ease, box-shadow .18s ease;
 }
-.store-badge:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
-.store-badge__icon { width: 26px; height: 26px; flex-shrink: 0; }
-.store-badge__text { display: flex; flex-direction: column; line-height: 1.2; }
-.store-badge__text small { font-size: 10.5px; color: var(--ink-300); }
-.store-badge__text strong { font-size: 15px; font-weight: 700; }
-.store-badge--light {
-  background: #fff;
-  color: var(--ink-900);
-  border-color: var(--border);
+.auth-btn--ghost {
+  border: 1px solid rgba(255,255,255,0.22);
+  color: #fff;
 }
-.store-badge--light .store-badge__text small { color: var(--ink-500); }
 
 .waitlist-note {
   margin-top: 14px;

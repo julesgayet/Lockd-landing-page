@@ -1,0 +1,145 @@
+/* ============================================================
+   Lockd — Styles des pages d'authentification
+   (connexion.html, creer-un-compte.html)
+   Charge après style.css : réutilise ses variables et classes
+   partagées (.btn, .container, .nav, .footer...).
+   ============================================================ */
+
+/* Même fond bleu-noir que le hero de l'accueil, halo compris, pour
+   que ces pages s'inscrivent dans la même identité visuelle. La nav
+   garde donc son comportement par défaut (transparente en haut,
+   texte blanc, puis fond clair au scroll) — pas besoin de variante. */
+.auth-section {
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 150px 0 80px;
+  background: var(--ink-900);
+}
+.auth-section__glow {
+  position: absolute;
+  inset: -20% -10% auto -10%;
+  height: 720px;
+  background:
+    radial-gradient(60% 60% at 20% 20%, rgba(74,93,247,0.55), transparent 70%),
+    radial-gradient(50% 50% at 85% 15%, rgba(56,189,248,0.35), transparent 70%);
+  filter: blur(40px);
+  pointer-events: none;
+}
+.auth-card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: 40px 36px;
+}
+.auth-card__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--ink-500);
+  margin-bottom: 26px;
+}
+.auth-card__back:hover { color: var(--ink-900); }
+.auth-card h1 { font-size: 25px; margin-bottom: 8px; }
+.auth-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--brand-start);
+  background: rgba(74,93,247,0.1);
+  padding: 5px 11px;
+  border-radius: 999px;
+  margin-bottom: 16px;
+}
+.auth-card__lead {
+  font-size: 14.5px;
+  color: var(--ink-500);
+  line-height: 1.55;
+}
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 26px;
+}
+.auth-field { display: flex; flex-direction: column; gap: 6px; }
+.auth-field label { font-size: 13px; font-weight: 700; color: var(--ink-700); }
+.auth-field input {
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  font-size: 14.5px;
+  font-family: inherit;
+  color: var(--ink-900);
+  background: var(--paper);
+  outline: none;
+  transition: border-color .15s ease;
+}
+.auth-field input:focus { border-color: var(--brand-start); }
+.auth-forgot {
+  align-self: flex-end;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--ink-500);
+  margin-top: -8px;
+}
+.auth-forgot:hover { color: var(--ink-900); }
+.auth-submit {
+  margin-top: 6px;
+  width: 100%;
+}
+.auth-submit:disabled { opacity: .6; cursor: not-allowed; transform: none; box-shadow: none; }
+.auth-note {
+  font-size: 12.5px;
+  color: var(--ink-400);
+  text-align: center;
+  margin-top: 14px;
+  line-height: 1.5;
+}
+.auth-switch {
+  text-align: center;
+  font-size: 14px;
+  color: var(--ink-500);
+  margin-top: 28px;
+  padding-top: 22px;
+  border-top: 1px solid var(--border);
+}
+.auth-switch a { color: var(--brand-start); font-weight: 700; }
+
+.auth-status {
+  font-size: 13.5px;
+  font-weight: 600;
+  padding: 10px 14px;
+  border-radius: 10px;
+  margin-top: -4px;
+}
+.auth-status--error { color: #B42318; background: rgba(240,68,56,0.1); }
+.auth-status--success { color: #067647; background: rgba(23,178,106,0.1); }
+
+.auth-success__icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--brand-start), var(--brand-end));
+  margin-bottom: 18px;
+}
+.auth-submit--active { margin-top: 22px; text-align: center; }
+
+@media (max-width: 720px) {
+  .auth-card { padding: 32px 24px; }
+}
