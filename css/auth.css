@@ -74,6 +74,7 @@
   gap: 16px;
   margin-top: 26px;
 }
+.auth-form[hidden] { display: none; }
 .auth-field { display: flex; flex-direction: column; gap: 6px; }
 .auth-field label { font-size: 13px; font-weight: 700; color: var(--ink-700); }
 .auth-field input {
@@ -139,6 +140,34 @@
   margin-bottom: 18px;
 }
 .auth-submit--active { margin-top: 22px; text-align: center; }
+
+/* Bouton App Store : même gabarit que le CTA principal (.btn), pour
+   que les deux boutons de la carte de succès s'alignent parfaitement. */
+.auth-card__store {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 24px;
+  border-radius: 999px;
+  border: none;
+  background: var(--ink-900);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  box-shadow: 0 8px 20px rgba(15,17,26,0.25);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.auth-card__store:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(15,17,26,0.35); }
+
+/* Quand la pastille App Store précède le CTA principal (écran de succès),
+   même rythme vertical entre les deux boutons. */
+.auth-success__icon ~ .auth-card__store {
+  margin-top: 22px;
+  margin-bottom: 14px;
+}
+.auth-card__store + .auth-submit--active { margin-top: 0; }
 
 @media (max-width: 720px) {
   .auth-card { padding: 32px 24px; }

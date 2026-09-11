@@ -16,4 +16,9 @@
   var SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_rk5RmvlmHVebGRu5I5Z_kQ_ANcbigC3';
 
   window.supabaseClient = window.supabaseClient || window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+
+  // Comptes admin/dev — accès au dashboard interne (admin.html). Ne
+  // sert qu'à l'aiguillage côté UI : le vrai contrôle d'accès est
+  // fait par les policies RLS "admin_select_*" côté base.
+  window.ADMIN_EMAILS = ['jules.gayet12@gmail.com', 'augustin.durand18@gmail.com'];
 })();

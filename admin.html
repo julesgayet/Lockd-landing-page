@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dashboard : Lockd</title>
+<meta name="robots" content="noindex, nofollow" />
+
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/admin.css?v=2" />
+</head>
+<body class="admin-body">
+
+<!-- Écran affiché pendant la vérification de session, pour ne jamais
+     laisser apparaître le dashboard avant d'être sûr que la personne
+     est bien l'un des deux comptes admin. -->
+<div class="admin-gate" id="adminGate">
+  <div class="admin-gate__spinner" aria-hidden="true"></div>
+  <p>Vérification de l'accès…</p>
+</div>
+
+<div class="admin-app" id="adminApp" hidden>
+  <header class="admin-header">
+    <a href="index.html" class="admin-brand">
+      <span class="brand__mark" aria-hidden="true">
+        <svg viewBox="0 0 1024 1024" width="30" height="30">
+          <rect width="1024" height="1024" rx="230" fill="#000"/>
+          <path d="M360 640 V370 A150 150 0 0 1 660 370 V470" fill="none" stroke="#fff" stroke-width="92" stroke-linecap="butt"/>
+          <rect x="314" y="620" width="420" height="150" fill="#fff"/>
+        </svg>
+      </span>
+      <span>Lockd <span class="admin-header__tag">Dashboard</span></span>
+    </a>
+    <div class="admin-header__right">
+      <span class="admin-header__user" id="adminUserEmail"></span>
+      <button class="admin-logout" id="adminLogout" type="button">Se déconnecter</button>
+    </div>
+  </header>
+
+  <main class="admin-main">
+    <div class="admin-live-dot"><span></span>Connecté en direct à la base de production</div>
+
+    <section class="admin-stats">
+      <div class="admin-stat">
+        <p class="admin-stat__label">Utilisateurs inscrits</p>
+        <p class="admin-stat__value" id="statUsers">—</p>
+      </div>
+      <div class="admin-stat">
+        <p class="admin-stat__label">Objectifs en cours</p>
+        <p class="admin-stat__value" id="statGoalsActive">—</p>
+      </div>
+      <div class="admin-stat admin-stat--accent">
+        <p class="admin-stat__label">Argent en jeu en direct</p>
+        <p class="admin-stat__value" id="statStakeAmount">—</p>
+      </div>
+    </section>
+
+    <section class="admin-panels">
+      <div class="admin-panel">
+        <div class="admin-panel__head">
+          <h2>Nouvelles inscriptions</h2>
+          <span class="admin-panel__pulse"></span>
+        </div>
+        <ul class="admin-feed" id="feedUsers">
+          <li class="admin-feed__empty">Chargement…</li>
+        </ul>
+      </div>
+
+      <div class="admin-panel">
+        <div class="admin-panel__head">
+          <h2>Objectifs qui se créent</h2>
+          <span class="admin-panel__pulse"></span>
+        </div>
+        <ul class="admin-feed" id="feedGoals">
+          <li class="admin-feed__empty">Chargement…</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script src="js/supabase-client.js?v=2"></script>
+<script src="js/admin-dashboard.js?v=3"></script>
+</body>
+</html>

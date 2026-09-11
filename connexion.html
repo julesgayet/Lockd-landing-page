@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css" />
-<link rel="stylesheet" href="css/auth.css" />
+<link rel="stylesheet" href="css/auth.css?v=7" />
 </head>
 <body>
 
@@ -57,26 +57,35 @@
   <div class="auth-section__glow" aria-hidden="true"></div>
   <div class="container">
     <div class="auth-card">
+      <a href="https://apps.apple.com/" target="_blank" rel="noopener" class="auth-card__store">
+        <svg viewBox="0 0 384 512" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-14.9 0-49.3-19.7-76.6-19.7C63.7 141 4 184.5 4 273.6c0 25.5 4.7 51.9 14 79.2 12.4 36.4 57.3 125.5 104.1 124 25.3-.6 43.2-18 76.2-18 32 0 48.4 18 76.6 18 47.2-.7 88.1-82 100-118.5-63.7-30-56.2-88.1-56.2-89.6zm-56.6-164.2c26.8-31.9 24.4-61 23.6-71.5-23.7 1.4-51.1 16.4-66.7 34.8-17.2 19.7-27.3 44.1-25.2 71.4 25.9 2 49.5-12.7 68.3-34.7z"/></svg>
+        Télécharger l'app
+      </a>
+
       <a href="index.html" class="auth-card__back">
         <svg viewBox="0 0 20 20" width="14" height="14" fill="none" aria-hidden="true"><path d="M12.5 4.5 7 10l5.5 5.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
         Retour à l'accueil
       </a>
 
       <h1>Se connecter</h1>
-      <p class="auth-card__lead">Retrouve le même compte que dans l'app Lockd — connecte-toi avec la même adresse e-mail et le même mot de passe.</p>
+      <p class="auth-card__lead" id="loginLead">Retrouve le même compte que dans l'app Lockd. Pas de mot de passe pour l'instant : on t'envoie un code de connexion par e-mail.</p>
 
       <form class="auth-form" id="loginForm" novalidate>
         <div class="auth-field">
           <label for="email">Adresse e-mail</label>
           <input type="email" id="email" name="email" placeholder="toi@email.com" autocomplete="email" required />
         </div>
-        <div class="auth-field">
-          <label for="password">Mot de passe</label>
-          <input type="password" id="password" name="password" placeholder="••••••••" autocomplete="current-password" required />
-        </div>
-        <a href="#" class="auth-forgot" data-placeholder="true">Mot de passe oublié ?</a>
         <p class="auth-status" id="authStatus" hidden></p>
-        <button type="submit" class="btn btn--primary auth-submit">Se connecter</button>
+        <button type="submit" class="btn btn--primary auth-submit">Recevoir le code de connexion</button>
+      </form>
+
+      <form class="auth-form" id="codeForm" novalidate hidden>
+        <div class="auth-field">
+          <label for="otpCode">Code reçu par e-mail</label>
+          <input type="text" id="otpCode" name="otpCode" inputmode="numeric" pattern="[0-9]*" autocomplete="one-time-code" placeholder="123456" maxlength="6" required />
+        </div>
+        <p class="auth-status" id="codeStatus" hidden></p>
+        <button type="submit" class="btn btn--primary auth-submit">Valider le code</button>
       </form>
 
       <p class="auth-switch">Pas encore de compte ? <a href="creer-un-compte.html">Créer un compte</a></p>
@@ -129,8 +138,8 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
-<script src="js/supabase-client.js"></script>
+<script src="js/supabase-client.js?v=2"></script>
 <script src="js/main.js"></script>
-<script src="js/auth-forms.js"></script>
+<script src="js/auth-forms.js?v=6"></script>
 </body>
 </html>
