@@ -324,6 +324,8 @@
   to { opacity: 1; transform: translateY(0); }
 }
 .admin-feed__main { min-width: 0; }
+.admin-feed__name-row { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.admin-feed__name-row .admin-feed__badge { margin-left: 0; }
 .admin-feed__title {
   font-size: 13.5px;
   font-weight: 700;
@@ -434,9 +436,6 @@
 }
 .account-drawer__close:hover { background: var(--ink-100); }
 
-.account-detail__title { font-size: 18px; font-weight: 800; color: var(--ink-900); padding-right: 30px; }
-.account-detail__sub { font-size: 13px; color: var(--ink-500); margin-top: 4px; }
-
 .account-detail__name-row { display: flex; align-items: center; gap: 8px; padding-right: 30px; }
 .account-detail__name-input {
   flex: 1;
@@ -467,6 +466,15 @@
 .account-detail__name-save:disabled { opacity: .35; cursor: default; }
 .account-detail__name-error { color: var(--danger); font-size: 12.5px; margin-top: 6px; }
 
+.account-detail__subrow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 5px;
+}
+.account-detail__sub { font-size: 13px; color: var(--ink-500); }
+
 .account-detail__stats {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -487,18 +495,26 @@
 }
 .account-detail__stat-value { font-size: 15px; font-weight: 700; color: var(--ink-900); margin-top: 3px; }
 
-.account-block {
+/* ---- Actions du compte (blocage + suppression, une seule carte) ---- */
+.account-actions {
   margin: 18px 0;
-  padding: 14px;
-  border-radius: var(--radius-md);
   border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
 }
-.account-block--active { border-color: rgba(240,68,56,0.35); background: rgba(240,68,56,0.05); }
-.account-block__row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-.account-block__reason { font-size: 12.5px; color: var(--ink-600); margin-top: 8px; }
-.account-block textarea {
+.account-actions__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 14px 16px;
+}
+.account-actions__label { font-size: 13.5px; font-weight: 700; color: var(--ink-900); }
+.account-actions__hint { font-size: 12px; color: var(--ink-500); margin-top: 3px; }
+.account-actions__divider { height: 1px; background: var(--ink-050); margin: 0 16px; }
+.account-actions__reveal { padding: 0 16px 14px; animation: adminFeedIn .2s ease; }
+.account-actions__reveal textarea {
   width: 100%;
-  margin-top: 10px;
   padding: 8px 10px;
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
@@ -506,17 +522,19 @@
   font-size: 13px;
   resize: vertical;
 }
-.account-block__error { color: var(--danger); font-size: 12.5px; margin-top: 8px; }
-
-/* ---- Zone dangereuse (suppression de compte) ---- */
-.account-danger {
-  margin: 10px 0 18px;
-  padding: 14px;
-  border-radius: var(--radius-md);
-  border: 1px dashed rgba(240,68,56,0.4);
+.account-actions__reveal-footer { display: flex; justify-content: flex-end; margin-top: 6px; }
+.account-actions__cancel {
+  background: none;
+  border: none;
+  color: var(--ink-500);
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 4px 6px;
 }
-.account-danger__row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-.account-danger__label { font-size: 12.5px; color: var(--ink-500); max-width: 260px; }
+.account-actions__cancel:hover { color: var(--ink-700); }
+.account-actions__error { color: var(--danger); font-size: 12.5px; padding: 0 16px 14px; }
+
 .account-danger__btn {
   border: 1px solid rgba(240,68,56,0.4);
   background: none;

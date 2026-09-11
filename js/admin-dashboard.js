@@ -92,6 +92,38 @@ document.addEventListener('DOMContentLoaded', () => {
     return ((cents || 0) / 100).toLocaleString('fr-FR', { minimumFractionDigits: 0, maximumFractionDigits: 2 }) + ' €';
   }
 
+  // Lettre du jour (L M M J V S D) et rang dans la semaine (lundi = 0)
+  // pour une séance, à partir de sa target_date ("YYYY-MM-DD"). On
+  // parse en UTC pour ne pas laisser le fuseau du navigateur décaler
+  // la date d'un jour.
+  const DAY_LETTERS = ['D', 'L', 'M', 'M', 'J', 'V', 'S']; // indexé par getUTCDay() (0 = dimanche)
+  const DAY_NAMES = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
+
+  function dateFromTargetDate(targetDate) {
+    if (!targetDate) return null;
+    const [y, m, d] = targetDate.split('-').map(Number);
+    if (!y || !m || !d) return null;
+    return new Date(Date.UTC(y, m - 1, d));
+  }
+
+  function dayLetter(targetDate) {
+    const d = dateFromTargetDate(targetDate);
+    return d ? DAY_LETTERS[d.getUTCDay()] : '?';
+  }
+
+  function dayName(targetDate) {
+    const d = dateFromTargetDate(targetDate);
+    return d ? DAY_NAMES[d.getUTCDay()] : '';
+  }
+
+  // Rang dans la semaine, lundi en premier (0) et dimanche en dernier (6),
+  // pour trier les pastilles L M M J V S D dans l'ordre plutôt que dans
+  // l'ordre d'arrivée des séances.
+  function weekOrder(targetDate) {
+    const d = dateFromTargetDate(targetDate);
+    return d ? (d.getUTCDay() + 6) % 7 : 7;
+  }
+
   function relativeTime(iso) {
     const diffMs = Date.now() - new Date(iso).getTime();
     const min = Math.floor(diffMs / 60000);
@@ -190,12 +222,23 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!badge) {
       badge = document.createElement('span');
       if (num != null) badge.dataset.session = num;
-      badges.appendChild(badge);
+
+      // On insère la pastille à sa place dans la semaine (lundi → dimanche)
+      // plutôt qu'à la fin, pour que L M M J V S D restent dans l'ordre
+      // quel que soit l'ordre d'arrivée des séances.
+      const order = weekOrder(row.target_date);
+      badge.dataset.weekOrder = String(order);
+      const nextSibling = Array.from(badges.children).find(
+        (el) => Number(el.dataset.weekOrder) > order
+      );
+      badges.insertBefore(badge, nextSibling || null);
     }
     const badgeClass = stateBadgeClass(row.state);
     badge.className = 'admin-feed__badge' + (badgeClass ? ' ' + badgeClass : '');
-    badge.title = STATE_LABELS[row.state] || row.state;
-    badge.textContent = num != null ? String(num) : (STATE_LABELS[row.state] || row.state);
+    const state = STATE_LABELS[row.state] || row.state;
+    const day = dayName(row.target_date);
+    badge.title = day ? day + ' — ' + state : state;
+    badge.textContent = row.target_date ? dayLetter(row.target_date) : (num != null ? String(num) : state);
 
     const sub = li.querySelector('[data-role="sessionCount"]');
     const count = badges.children.length;
@@ -247,7 +290,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // très peu de plans distincts.
     const { data: goals } = await supabaseClient
       .from('goals')
-      .select('id, title, state, created_at, plan_id, session_number')
+      .select('id, title, state, created_at, plan_id, session_number, target_date')
       .order('created_at', { ascending: false })
       .limit(40);
 

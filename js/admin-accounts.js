@@ -155,23 +155,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const main = document.createElement('div');
     main.className = 'admin-feed__main';
+    const nameRow = document.createElement('div');
+    nameRow.className = 'admin-feed__name-row';
     const title = document.createElement('p');
     title.className = 'admin-feed__title';
     title.textContent = row.display_name || 'Sans nom';
-    const sub = document.createElement('p');
-    sub.className = 'admin-feed__sub';
-    sub.textContent = row.email || '';
-    main.append(title, sub);
-
-    const right = document.createElement('span');
-    right.className = 'account-row__badges';
-
+    nameRow.appendChild(title);
     if (window.ADMIN_EMAILS && window.ADMIN_EMAILS.includes(row.email)) {
       const adminBadge = document.createElement('span');
       adminBadge.className = 'admin-feed__badge admin-feed__badge--admin';
       adminBadge.textContent = 'Admin';
-      right.appendChild(adminBadge);
+      nameRow.appendChild(adminBadge);
     }
+    const sub = document.createElement('p');
+    sub.className = 'admin-feed__sub';
+    sub.textContent = row.email || '';
+    main.append(nameRow, sub);
+
+    const right = document.createElement('span');
+    right.className = 'account-row__badges';
+
     const tierLabel = TIER_LABELS[row.subscription_tier];
     if (tierLabel) {
       const tierBadge = document.createElement('span');
@@ -213,12 +216,12 @@ document.addEventListener('DOMContentLoaded', () => {
     body.innerHTML = `
       <div class="account-detail__name-row">
         <input type="text" class="account-detail__name-input" data-role="nameInput" value="${escapeHtml(row.display_name || '')}" placeholder="Sans nom" maxlength="120" />
-        <button type="button" class="account-detail__name-save" data-role="nameSave" disabled>Enregistrer</button>
+        <button type="button" class="account-detail__name-save" data-role="nameSave" hidden>Enregistrer</button>
       </div>
-      <p class="account-detail__sub">
-        ${escapeHtml(row.email || '')} · inscrit le ${escapeHtml(formatDate(row.created_at))}${tierLabel ? ' · ' + escapeHtml(tierLabel) : ''}
-        ${isAdminAccount ? '<span class="admin-feed__badge admin-feed__badge--admin" style="margin-left:6px;">Admin</span>' : ''}
-      </p>
+      <div class="account-detail__subrow">
+        <p class="account-detail__sub">${escapeHtml(row.email || '')} · inscrit le ${escapeHtml(formatDate(row.created_at))}${tierLabel ? ' · ' + escapeHtml(tierLabel) : ''}</p>
+        ${isAdminAccount ? '<span class="admin-feed__badge admin-feed__badge--admin">Admin</span>' : ''}
+      </div>
       <p class="account-detail__name-error" data-role="nameError" hidden></p>
 
       <div class="account-detail__stats">
@@ -240,24 +243,34 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
       </div>
 
-      <div class="account-block ${row.stake_block_active ? 'account-block--active' : ''}" data-role="blockSection">
-        <div class="account-block__row">
-          <strong>${row.stake_block_active ? 'Compte bloqué' : 'Compte actif'}</strong>
+      <div class="account-actions" data-role="blockSection">
+        <div class="account-actions__row">
+          <div>
+            <p class="account-actions__label">${row.stake_block_active ? 'Compte bloqué' : 'Compte actif'}</p>
+            ${row.stake_block_active && row.stake_block_reason ? '<p class="account-actions__hint"><strong>Raison :</strong> ' + escapeHtml(row.stake_block_reason) + '</p>' : ''}
+            ${row.stake_block_active && row.stake_block_since ? '<p class="account-actions__hint">Depuis le ' + escapeHtml(formatDate(row.stake_block_since)) + '</p>' : ''}
+          </div>
           <button type="button" class="dispute-btn ${row.stake_block_active ? 'dispute-btn--approve' : 'dispute-btn--reject'}" data-role="blockToggle">
             ${row.stake_block_active ? '✓ Débloquer' : '✕ Bloquer'}
           </button>
         </div>
-        ${row.stake_block_active && row.stake_block_reason ? '<p class="account-block__reason"><strong>Raison :</strong> ' + escapeHtml(row.stake_block_reason) + '</p>' : ''}
-        ${row.stake_block_active && row.stake_block_since ? '<p class="account-block__reason">Depuis le ' + escapeHtml(formatDate(row.stake_block_since)) + '</p>' : ''}
-        ${!row.stake_block_active ? '<textarea data-role="blockReason" placeholder="Raison du blocage (visible dans la fiche)" rows="2"></textarea>' : ''}
-        <p class="account-block__error" data-role="blockError" hidden></p>
-      </div>
+        ${!row.stake_block_active ? `
+        <div class="account-actions__reveal" data-role="blockReasonWrap" hidden>
+          <textarea data-role="blockReason" placeholder="Raison du blocage (visible dans la fiche)" rows="2"></textarea>
+          <div class="account-actions__reveal-footer">
+            <button type="button" class="account-actions__cancel" data-role="blockCancel">Annuler</button>
+          </div>
+        </div>
+        ` : ''}
+        <p class="account-actions__error" data-role="blockError" hidden></p>
 
-      <div class="account-danger">
-        <div class="account-danger__row">
-          <p class="account-danger__label">
-            ${isAdminAccount ? '⚠️ Compte administrateur — ' : ''}Supprime le compte et tout son historique, sans retour possible.
-          </p>
+        <div class="account-actions__divider"></div>
+
+        <div class="account-actions__row">
+          <div>
+            <p class="account-actions__label">${isAdminAccount ? '⚠️ Compte administrateur' : 'Supprimer le compte'}</p>
+            <p class="account-actions__hint">Efface définitivement le compte et tout son historique.</p>
+          </div>
           <button type="button" class="account-danger__btn" data-role="deleteAccount">Supprimer</button>
         </div>
       </div>
@@ -276,10 +289,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const deleteBtn = body.querySelector('[data-role="deleteAccount"]');
     if (deleteBtn) deleteBtn.addEventListener('click', () => openDeleteConfirm(row));
 
+    const blockCancel = body.querySelector('[data-role="blockCancel"]');
+    if (blockCancel) blockCancel.addEventListener('click', () => cancelBlockReveal(body));
+
     const nameInput = body.querySelector('[data-role="nameInput"]');
     const nameSave = body.querySelector('[data-role="nameSave"]');
     nameInput.addEventListener('input', () => {
-      nameSave.disabled = nameInput.value.trim() === (row.display_name || '');
+      nameSave.hidden = nameInput.value.trim() === (row.display_name || '');
     });
     nameSave.addEventListener('click', () => saveDisplayName(row, body));
 
@@ -311,14 +327,16 @@ document.addEventListener('DOMContentLoaded', () => {
       p_display_name: newName || null,
     });
 
+    saveBtn.disabled = false;
+
     if (error) {
       errorEl.textContent = 'Échec : ' + error.message;
       errorEl.hidden = false;
-      saveBtn.disabled = false;
       return;
     }
 
     row.display_name = newName || null;
+    saveBtn.hidden = true;
     const cachedIndex = accountsCache.findIndex((r) => r.user_id === row.user_id);
     if (cachedIndex !== -1) accountsCache[cachedIndex] = row;
     renderAccounts(filterAccounts(document.getElementById('accountsSearch').value));
@@ -422,11 +440,32 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ---------- Blocage / déblocage ----------
+  function cancelBlockReveal(body) {
+    const section = body.querySelector('[data-role="blockSection"]');
+    const wrap = section.querySelector('[data-role="blockReasonWrap"]');
+    const toggleBtn = section.querySelector('[data-role="blockToggle"]');
+    const errorEl = section.querySelector('[data-role="blockError"]');
+    wrap.hidden = true;
+    wrap.querySelector('textarea').value = '';
+    toggleBtn.textContent = '✕ Bloquer';
+    errorEl.hidden = true;
+  }
+
   async function toggleBlock(row, body) {
     const section = body.querySelector('[data-role="blockSection"]');
     const toggleBtn = section.querySelector('[data-role="blockToggle"]');
     const errorEl = section.querySelector('[data-role="blockError"]');
     const willBlock = !row.stake_block_active;
+    const reasonWrap = section.querySelector('[data-role="blockReasonWrap"]');
+
+    // Premier clic : révèle juste le champ de raison, ne bloque pas encore.
+    if (willBlock && reasonWrap && reasonWrap.hidden) {
+      reasonWrap.hidden = false;
+      toggleBtn.textContent = '✕ Confirmer le blocage';
+      reasonWrap.querySelector('textarea').focus();
+      return;
+    }
+
     const reasonEl = section.querySelector('[data-role="blockReason"]');
     const reason = reasonEl ? reasonEl.value.trim() : '';
 
