@@ -204,6 +204,28 @@ img, svg { display: block; }
 }
 .nav__cta { margin-left: 4px; }
 
+/* Bouton "Se déconnecter" : pastille noire à gauche du menu, affiché
+   uniquement quand une session est active (voir js/nav-auth.js). */
+.nav__logout {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  background: var(--ink-900);
+  border: none;
+  cursor: pointer;
+  transition: transform .18s ease, box-shadow .18s ease, opacity .15s ease;
+}
+.nav__logout svg { flex-shrink: 0; }
+.nav__logout:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(15,17,26,0.3); }
+.nav__logout:active:not(:disabled) { transform: translateY(0); }
+.nav__logout:disabled { opacity: .65; cursor: not-allowed; }
+.nav__logout[hidden] { display: none; }
+
 .nav__burger {
   display: none;
   flex-direction: column;
@@ -235,6 +257,23 @@ img, svg { display: block; }
 }
 .nav__mobile .btn { margin-top: 12px; }
 .nav__mobile.open { display: flex; }
+.nav__mobile-logout {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 4px;
+  font-weight: 600;
+  font-size: 15px;
+  text-align: left;
+  color: var(--ink-700);
+  border-bottom: 1px solid var(--ink-050);
+  background: none;
+  border-radius: 0;
+  cursor: pointer;
+}
+.nav__mobile-logout svg { flex-shrink: 0; }
+.nav__mobile-logout:disabled { opacity: .6; cursor: not-allowed; }
+.nav__mobile-logout[hidden] { display: none; }
 
 /* ============ Hero ============ */
 .hero {

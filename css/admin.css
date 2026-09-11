@@ -100,6 +100,144 @@
   100% { box-shadow: 0 0 0 0 rgba(23,178,106,0); }
 }
 
+/* ---- Onglets ---- */
+.admin-tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--border);
+}
+.admin-tab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  padding: 10px 4px;
+  margin-right: 20px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink-400);
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+}
+.admin-tab:hover { color: var(--ink-700); }
+.admin-tab.is-active {
+  color: var(--ink-900);
+  border-bottom-color: var(--brand-start);
+}
+.admin-tab__count {
+  background: var(--danger);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1;
+  padding: 3px 7px;
+  border-radius: 999px;
+}
+
+/* ---- Contestations ---- */
+.admin-disputes { list-style: none; }
+.admin-disputes--history {
+  max-height: 420px;
+  overflow-y: auto;
+}
+
+.dispute-card {
+  display: flex;
+  gap: 18px;
+  padding: 20px;
+  border-bottom: 1px solid var(--ink-050);
+  animation: adminFeedIn .4s ease;
+}
+.dispute-card:last-child { border-bottom: none; }
+
+.dispute-card__photo {
+  flex-shrink: 0;
+  width: 160px;
+  height: 160px;
+  border-radius: var(--radius-md);
+  background: var(--ink-050);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.dispute-card__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.dispute-card__photo-placeholder {
+  font-size: 12px;
+  color: var(--ink-400);
+  text-align: center;
+  padding: 0 12px;
+}
+
+.dispute-card__body { flex: 1; min-width: 0; }
+.dispute-card__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+.dispute-card__title {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--ink-900);
+}
+.dispute-card__reason {
+  font-size: 13.5px;
+  color: var(--ink-700);
+  margin: 10px 0 8px;
+}
+.dispute-card__ai { margin-bottom: 4px; }
+.dispute-card__note {
+  width: 100%;
+  margin-top: 10px;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 13px;
+  resize: vertical;
+}
+.dispute-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+.dispute-btn {
+  border: none;
+  border-radius: 999px;
+  padding: 10px 22px;
+  font-size: 13.5px;
+  font-weight: 800;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: transform .1s ease, box-shadow .15s ease, background .15s ease;
+}
+.dispute-btn:hover:not(:disabled) { transform: translateY(-1px); box-shadow: var(--shadow-md); }
+.dispute-btn:active:not(:disabled) { transform: translateY(0); }
+.dispute-btn:disabled { opacity: .5; cursor: default; transform: none; box-shadow: none; }
+.dispute-btn--approve { background: #17B26A; }
+.dispute-btn--approve:hover:not(:disabled) { background: #12945A; }
+.dispute-btn--reject { background: #F04438; }
+.dispute-btn--reject:hover:not(:disabled) { background: #D13B30; }
+.dispute-card__error {
+  color: var(--danger);
+  font-size: 12.5px;
+  margin-top: 8px;
+}
+
+@media (max-width: 640px) {
+  .dispute-card { flex-direction: column; }
+  .dispute-card__photo { width: 100%; height: 200px; }
+}
+
 /* ---- Stat cards ---- */
 .admin-stats {
   display: grid;
@@ -224,4 +362,246 @@
   .admin-panels { grid-template-columns: 1fr; }
   .admin-header { padding: 14px 18px; }
   .admin-main { padding: 22px 16px 48px; }
+}
+
+/* ---- Comptes ---- */
+.admin-panel__head--accounts { justify-content: space-between; }
+.admin-search {
+  width: 240px;
+  max-width: 50vw;
+  padding: 8px 14px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  background: var(--ink-050);
+}
+.admin-search:focus { outline: none; border-color: var(--brand-start); background: var(--paper); }
+
+.admin-accounts { list-style: none; max-height: 560px; overflow-y: auto; }
+.account-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  padding: 13px 20px;
+  border: none;
+  border-bottom: 1px solid var(--ink-050);
+  background: none;
+  text-align: left;
+  cursor: pointer;
+  font-family: var(--font-body);
+  animation: adminFeedIn .4s ease;
+}
+.account-row:last-child { border-bottom: none; }
+.account-row:hover { background: var(--ink-050); }
+.account-row__badges { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+.admin-feed__badge--blocked { background: rgba(240,68,56,0.1); color: #B42318; }
+.admin-feed__badge--tier { background: rgba(74,93,247,0.12); color: var(--brand-start); }
+.admin-feed__badge--admin { background: var(--ink-900); color: #fff; }
+
+/* ---- Fiche compte (tiroir latéral) ---- */
+.account-drawer[hidden] { display: none; }
+.account-drawer { position: fixed; inset: 0; z-index: 180; display: flex; justify-content: flex-end; }
+.account-drawer__backdrop { position: absolute; inset: 0; background: rgba(15,17,21,0.45); }
+.account-drawer__panel {
+  position: relative;
+  width: min(480px, 100%);
+  height: 100%;
+  background: var(--paper);
+  box-shadow: var(--shadow-md);
+  overflow-y: auto;
+  padding: 30px 26px;
+  animation: accountDrawerIn .25s ease;
+}
+@keyframes accountDrawerIn {
+  from { transform: translateX(24px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+.account-drawer__close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: var(--ink-050);
+  color: var(--ink-700);
+  font-size: 14px;
+  cursor: pointer;
+}
+.account-drawer__close:hover { background: var(--ink-100); }
+
+.account-detail__title { font-size: 18px; font-weight: 800; color: var(--ink-900); padding-right: 30px; }
+.account-detail__sub { font-size: 13px; color: var(--ink-500); margin-top: 4px; }
+
+.account-detail__name-row { display: flex; align-items: center; gap: 8px; padding-right: 30px; }
+.account-detail__name-input {
+  flex: 1;
+  min-width: 0;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  padding: 4px 8px;
+  margin-left: -9px;
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 18px;
+  color: var(--ink-900);
+  background: none;
+}
+.account-detail__name-input:hover { border-color: var(--border); }
+.account-detail__name-input:focus { outline: none; border-color: var(--brand-start); background: var(--ink-050); }
+.account-detail__name-save {
+  flex-shrink: 0;
+  border: none;
+  background: var(--brand-start);
+  color: #fff;
+  border-radius: 999px;
+  padding: 7px 14px;
+  font-size: 12.5px;
+  font-weight: 800;
+  cursor: pointer;
+}
+.account-detail__name-save:disabled { opacity: .35; cursor: default; }
+.account-detail__name-error { color: var(--danger); font-size: 12.5px; margin-top: 6px; }
+
+.account-detail__stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 18px 0;
+}
+.account-detail__stat {
+  background: var(--ink-050);
+  border-radius: var(--radius-md);
+  padding: 10px 12px;
+}
+.account-detail__stat-label {
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--ink-500);
+  text-transform: uppercase;
+  letter-spacing: .03em;
+}
+.account-detail__stat-value { font-size: 15px; font-weight: 700; color: var(--ink-900); margin-top: 3px; }
+
+.account-block {
+  margin: 18px 0;
+  padding: 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+}
+.account-block--active { border-color: rgba(240,68,56,0.35); background: rgba(240,68,56,0.05); }
+.account-block__row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.account-block__reason { font-size: 12.5px; color: var(--ink-600); margin-top: 8px; }
+.account-block textarea {
+  width: 100%;
+  margin-top: 10px;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 13px;
+  resize: vertical;
+}
+.account-block__error { color: var(--danger); font-size: 12.5px; margin-top: 8px; }
+
+/* ---- Zone dangereuse (suppression de compte) ---- */
+.account-danger {
+  margin: 10px 0 18px;
+  padding: 14px;
+  border-radius: var(--radius-md);
+  border: 1px dashed rgba(240,68,56,0.4);
+}
+.account-danger__row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.account-danger__label { font-size: 12.5px; color: var(--ink-500); max-width: 260px; }
+.account-danger__btn {
+  border: 1px solid rgba(240,68,56,0.4);
+  background: none;
+  color: var(--danger);
+  border-radius: 999px;
+  padding: 9px 16px;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+.account-danger__btn:hover { background: rgba(240,68,56,0.08); }
+
+/* ---- Fenêtre de confirmation (suppression définitive) ---- */
+.confirm-modal[hidden] { display: none; }
+.confirm-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 220;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.confirm-modal__backdrop { position: absolute; inset: 0; background: rgba(15,17,21,0.55); }
+.confirm-modal__panel {
+  position: relative;
+  width: min(420px, 100%);
+  background: var(--paper);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: 26px 24px;
+  animation: accountDrawerIn .2s ease;
+}
+.confirm-modal__warning {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--danger);
+  background: rgba(240,68,56,0.1);
+  padding: 4px 10px;
+  border-radius: 999px;
+  margin-bottom: 12px;
+}
+.confirm-modal__title { font-size: 17px; font-weight: 800; color: var(--ink-900); }
+.confirm-modal__body { font-size: 13.5px; color: var(--ink-600); margin-top: 8px; line-height: 1.5; }
+.confirm-modal__hint { font-size: 12.5px; color: var(--ink-500); margin-top: 16px; }
+.confirm-modal__input {
+  width: 100%;
+  margin-top: 8px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 13.5px;
+}
+.confirm-modal__input:focus { outline: none; border-color: var(--danger); }
+.confirm-modal__error { color: var(--danger); font-size: 12.5px; margin-top: 8px; }
+.confirm-modal__actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; }
+.confirm-modal__cancel {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--ink-700);
+  border-radius: 999px;
+  padding: 10px 18px;
+  font-size: 13.5px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.confirm-modal__cancel:hover { background: var(--ink-050); }
+#deleteConfirmButton:disabled { opacity: .4; cursor: not-allowed; }
+
+.account-detail__section-title {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--ink-500);
+  text-transform: uppercase;
+  letter-spacing: .03em;
+  margin: 22px 0 6px;
+}
+.account-detail__list { list-style: none; }
+.account-detail__list .admin-feed__item { padding: 10px 0; }
+
+@media (max-width: 640px) {
+  .admin-panel__head--accounts { flex-direction: column; align-items: stretch; }
+  .admin-search { width: 100%; max-width: none; }
 }
