@@ -146,6 +146,7 @@ img, svg { display: block; }
   border-bottom: 1px solid var(--border);
 }
 .nav__inner {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 32px;
@@ -158,6 +159,11 @@ img, svg { display: block; }
   margin-right: auto;
 }
 .brand__mark { display: flex; flex-shrink: 0; }
+/* Le badge App Store vit dans la barre de nav, à côté du logo, à toutes les
+   tailles — le hero ne le montre plus, donc rien ne le remplace ailleurs. */
+.nav__store-badge { display: inline-flex; transition: transform .18s ease; }
+.nav__store-badge:hover { transform: translateY(-2px); }
+.nav__store-badge img { height: 34px; width: auto; display: block; border-radius: 8px; }
 .brand__name {
   font-family: var(--font-head);
   font-weight: 800;
@@ -169,7 +175,13 @@ img, svg { display: block; }
 .nav--scrolled .brand__name { color: var(--ink-900); }
 .brand__name--lg { font-size: 24px; }
 .nav__links {
-  position: relative;
+  /* Centré dans la barre, indépendamment de la largeur du logo ou du badge
+     de chaque côté — un centrage par marges suivrait leur largeur, pas le
+     centre réel de la barre. */
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
   align-items: center;
   gap: 2px;
@@ -659,8 +671,12 @@ img, svg { display: block; }
 }
 .ui-tabbar .on { color: #141B3C; }
 .ui-tabbar .plus { font-size: 22px; }
-@media (max-width: 768px) {
-  .container-scroll { height: 200vh; }
+@media (max-width: 900px) {
+  /* Le rétrécissement de l'iPhone est un `transform: scale()`, qui ne change
+     jamais la place qu'un élément réserve dans la mise en page : sans cette
+     hauteur fixe, la grille lui gardait ses 620px pleine taille, entièrement
+     vides sous le téléphone visuellement réduit. */
+  .iphone-stage { height: 300px; overflow: visible; }
 }
 
 /* ============ Strip ============ */
@@ -1112,14 +1128,27 @@ img, svg { display: block; }
   .nav__links { display: none; }
   .nav__cta { display: none; }
   .nav__burger { display: flex; }
+  /* `.brand` porte `margin-right: auto` pour pousser le pill de nav vers la
+     droite en desktop ; sur mobile ce pill n'existe plus, donc cette marge
+     rejetait aussi le badge tout contre le burger, loin du logo. On la
+     déplace sur le badge lui-même : il reste collé à « Lockd », et c'est
+     lui qui repousse le burger. */
+  .brand { margin-right: 0; }
+  .nav__store-badge { margin-right: auto; }
+  .nav__store-badge img { height: 30px; }
   .section { padding: 72px 0; }
   .hero { padding: 96px 0 88px; }
   .steps { grid-template-columns: 1fr; }
   .goal-grid { grid-template-columns: 1fr 1fr; }
   .trust-grid { grid-template-columns: 1fr; }
   .footer__cols { grid-template-columns: 1fr; gap: 28px; }
-  .store-badges { flex-direction: column; }
-  .store-badge { justify-content: center; }
+  /* `.store-badge` et `.auth-buttons` s'auto-alignent à gauche
+     (`align-self: flex-start`) pour un rangement en ligne ; empilés en
+     colonne ici, il leur faut un centrage explicite, sinon ils restent
+     collés à gauche sous un texte, lui, centré. */
+  .store-badges { flex-direction: column; align-items: center; }
+  .store-badge { justify-content: center; align-self: center; }
+  .auth-buttons { align-self: center; }
   .float-badge { display: none; }
   .phone-stack { width: 210px; }
   .phone { width: 210px; height: 457px; }
@@ -1127,10 +1156,14 @@ img, svg { display: block; }
 
 /* ============ Zoom dans « Rien ne se perd » (fin de la section Pourquoi) ============ */
 .why-portal { position: relative; }
-.why-portal > #pourquoi { position: sticky; background: #fff; }
 .gp-overlay { position: fixed; inset: 0; z-index: 40; pointer-events: none; visibility: hidden; }
 .gp-overlay.is-on { visibility: visible; }
 .gp-overlay__art { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+/* Le zoom (et la fixation qu'il exige) est réservé aux écrans où la section
+   tient sur une hauteur d'écran — voir glyph-portal.js pour la raison. */
+@media (min-width: 901px) {
+  .why-portal > #pourquoi { position: sticky; background: #fff; }
+}
 /* Après l'écran blanc du zoom, « Confiance » arrive sans grand vide au-dessus. */
 #confiance { padding-top: 48px; }
 

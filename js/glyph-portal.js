@@ -13,6 +13,12 @@
   const overlay = document.getElementById('gpOverlay');
   if (!wrap || !section || !source || !overlay) return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  // La technique consiste à figer toute la section en bas de son défilement.
+  // Elle suppose que la section tienne sur un écran : sur mobile, le texte
+  // de « Pourquoi ça marche » dépasse largement 100vh, et la figer aurait
+  // caché sa partie haute en permanence derrière le haut de l'écran. En
+  // dessous de 900px, la section garde donc un défilement normal, sans zoom.
+  if (window.matchMedia('(max-width: 900px)').matches) return;
 
   const clamp = (n, a = 0, b = 1) => Math.min(b, Math.max(a, n));
   const smooth = (a, b, n) => { const t = clamp((n - a) / (b - a)); return t * t * (3 - 2 * t); };

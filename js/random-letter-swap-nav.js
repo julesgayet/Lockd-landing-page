@@ -8,10 +8,17 @@
   const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
   const REEL_LENGTH = 8; // caractères aléatoires avant la lettre finale
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // Un survol n'existe pas au doigt : sur un écran tactile, l'effet ne se
+  // déclencherait jamais et ne servirait qu'à fragiliser l'espacement du
+  // texte pour rien.
+  const touch = window.matchMedia('(pointer: coarse)').matches;
+  if (touch) return;
 
   const randomChar = () => CHARS[Math.floor(Math.random() * CHARS.length)];
 
-  document.querySelectorAll('.nav__links a, .nav__mobile a').forEach((link) => {
+  // Seuls les liens de la barre de nav sont concernés — pas le bouton
+  // « Télécharger l'app » du menu mobile, qui n'est pas un lien de nav.
+  document.querySelectorAll('.nav__links a, .nav__mobile a:not(.btn)').forEach((link) => {
     const original = link.textContent;
 
     link.innerHTML = Array.from(original).map((ch) => {
