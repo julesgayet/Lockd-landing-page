@@ -623,3 +623,80 @@
   .admin-panel__head--accounts { flex-direction: column; align-items: stretch; }
   .admin-search { width: 100%; max-width: none; }
 }
+
+/* Justificatif joint à une contestation (0071) */
+.dispute-card__attachment {
+  margin: 8px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.dispute-card__attachment img {
+  max-width: 240px;
+  max-height: 240px;
+  border-radius: var(--radius-md);
+  object-fit: contain;
+  background: var(--ink-050);
+}
+.dispute-card__attachment-link {
+  font-size: 13px;
+  color: var(--ink-700);
+  text-decoration: underline;
+}
+
+/* Agrandissement de la preuve et du justificatif */
+.dispute-card__photo img.is-zoomable,
+.dispute-card__attachment img.is-zoomable {
+  cursor: zoom-in;
+}
+.dispute-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  cursor: zoom-out;
+}
+.dispute-lightbox img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+  cursor: default;
+}
+.dispute-lightbox__close {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  background: none;
+  border: 0;
+  color: #fff;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+/* Historique des décisions : chaque ligne s'ouvre */
+.history-item { border-bottom: 1px solid var(--ink-050); }
+.history-item:last-child { border-bottom: none; }
+.history-item__head {
+  width: 100%;
+  background: none;
+  border: 0;
+  border-bottom: none;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.history-item__head:hover { background: var(--ink-050); }
+.history-item__chevron {
+  flex-shrink: 0;
+  color: var(--ink-400);
+  transition: transform .2s ease;
+}
+.history-item.is-open .history-item__chevron { transform: rotate(180deg); }
+.history-item__detail { padding: 0 20px 16px; }
+.history-item__card { margin: 0; }

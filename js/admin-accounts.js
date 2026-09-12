@@ -396,7 +396,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const [goalsRes, stakesRes, disputesRes] = await Promise.all([
       supabaseClient.from('goals').select('id, title, state, created_at, reference').eq('user_id', userId).order('created_at', { ascending: false }).limit(8),
       supabaseClient.from('stakes').select('id, amount_cents, status, created_at').eq('user_id', userId).order('created_at', { ascending: false }).limit(8),
-      supabaseClient.from('disputes').select('id, status, filed_at, resolved_at').eq('user_id', userId).order('filed_at', { ascending: false }).limit(5),
+      supabaseClient.from('disputes').select('id, status, filed_at, resolved_at, proof_id, attachment_path').eq('user_id', userId).order('filed_at', { ascending: false }).limit(5),
     ]);
 
     fillSimpleList(body.querySelector('[data-role="goalsList"]'), goalsRes.data, 'Aucun objectif.', (row) => ({
@@ -413,7 +413,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     fillSimpleList(body.querySelector('[data-role="disputesList"]'), disputesRes.data, 'Aucune contestation.', (row) => ({
       title: DISPUTE_STATUS_LABELS[row.status] || row.status,
-      sub: formatDate(row.filed_at),
+      sub: formatDate(row.filed_at)
+        + (row.proof_id ? '' : ' · sans preuve')
+        + (row.attachment_path ? ' · 📎 justificatif' : ''),
       badge: null,
     }));
   }

@@ -72,6 +72,43 @@ document.addEventListener('DOMContentLoaded', () => {
     return div.innerHTML;
   }
 
+  // ---------- Agrandissement (photo preuve et justificatif) ----------
+  let lightbox = null;
+
+  function openLightbox(src, alt) {
+    if (!lightbox) {
+      lightbox = document.createElement('div');
+      lightbox.className = 'dispute-lightbox';
+      lightbox.hidden = true;
+      lightbox.innerHTML = '<button type="button" class="dispute-lightbox__close" aria-label="Fermer">✕</button><img alt="">';
+      lightbox.addEventListener('click', (e) => {
+        if (e.target.tagName !== 'IMG') closeLightbox();
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeLightbox();
+      });
+      document.body.appendChild(lightbox);
+    }
+    const img = lightbox.querySelector('img');
+    img.src = src;
+    img.alt = alt || '';
+    lightbox.hidden = false;
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    if (!lightbox || lightbox.hidden) return;
+    lightbox.hidden = true;
+    lightbox.querySelector('img').src = '';
+    document.body.style.overflow = '';
+  }
+
+  function makeZoomable(img) {
+    img.classList.add('is-zoomable');
+    img.title = 'Cliquer pour agrandir';
+    img.addEventListener('click', () => openLightbox(img.src, img.alt));
+  }
+
   function updateCount(n) {
     const badge = document.getElementById('disputesCount');
     badge.textContent = String(n);
@@ -85,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const { data, error } = await supabaseClient
       .from('disputes')
       .select(`
-        id, reason, status, filed_at,
+        id, reason, status, filed_at, attachment_path, attachment_name,
         goal:goals ( id, title, reference, state ),
         user:profiles ( display_name, email ),
         proof:proofs ( id, storage_path, ai_verdict, ai_confidence, ai_reason, captured_at )
@@ -115,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const { data, error } = await supabaseClient
       .from('disputes')
       .select(`
-        id, reason, status, filed_at, resolved_at, resolution_note, reviewer_id,
+        id, reason, status, filed_at, resolved_at, resolution_note, reviewer_id, attachment_path,
         goal:goals ( title, reference ),
         user:profiles ( display_name, email )
       `)
@@ -162,11 +199,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
         <p class="dispute-card__reason"><strong>Raison de l'utilisateur :</strong> ${escapeHtml(row.reason)}</p>
 
+        ${row.proof ? `
         <p class="dispute-card__ai">
           <span class="admin-feed__badge ${proof.ai_verdict === 'fail' ? 'admin-feed__badge--failed' : ''}">${escapeHtml(VERDICT_LABELS[proof.ai_verdict] || 'IA : verdict inconnu')}</span>
           ${proof.ai_confidence != null ? '<span class="admin-feed__sub" style="display:inline;">confiance ' + Math.round(proof.ai_confidence * 100) + '%</span>' : ''}
         </p>
         ${proof.ai_reason ? '<p class="admin-feed__sub">« ' + escapeHtml(proof.ai_reason) + ' »</p>' : ''}
+        ` : `
+        <p class="dispute-card__ai"><span class="admin-feed__badge admin-feed__badge--failed">Aucune preuve envoyée</span></p>
+        `}
+
+        <div class="dispute-card__attachment" data-role="attachment">
+          ${row.attachment_path ? '<span class="admin-feed__sub">Chargement du justificatif…</span>' : '<span class="admin-feed__sub">Aucun justificatif joint</span>'}
+        </div>
 
         <textarea class="dispute-card__note" placeholder="Note (optionnelle, visible dans l'historique)" rows="2"></textarea>
 
@@ -178,7 +223,8 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
     `;
 
-    loadPhoto(li, proof.storage_path);
+    loadPhoto(li, proof.storage_path, !row.proof);
+    if (row.attachment_path) loadAttachment(li, row.attachment_path, row.attachment_name);
 
     li.querySelectorAll('.dispute-btn').forEach((btn) => {
       btn.addEventListener('click', () => resolveDispute(li, row.id, btn.dataset.action === 'upheld'));
@@ -189,25 +235,125 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function buildHistoryItem(row) {
     const li = document.createElement('li');
-    li.className = 'admin-feed__item';
+    li.className = 'history-item';
     const goal = row.goal || {};
     const user = row.user || {};
     const upheld = row.status === 'upheld';
 
     li.innerHTML = `
-      <div class="admin-feed__main">
-        <p class="admin-feed__title">${escapeHtml(goal.title || 'Objectif')} <span class="admin-feed__sub">${escapeHtml(goal.reference || '')}</span></p>
-        <p class="admin-feed__sub">${escapeHtml(user.display_name || 'Sans nom')} · ${row.resolution_note ? escapeHtml(row.resolution_note) : 'sans note'} · par ${escapeHtml(row.reviewer_id || '?')}</p>
-      </div>
-      <span class="admin-feed__badge ${upheld ? 'admin-feed__badge--kept' : 'admin-feed__badge--failed'}">${upheld ? 'Accepté' : 'Rejeté'}</span>
+      <button type="button" class="admin-feed__item history-item__head" aria-expanded="false">
+        <div class="admin-feed__main">
+          <p class="admin-feed__title">${escapeHtml(goal.title || 'Objectif')} <span class="admin-feed__sub">${escapeHtml(goal.reference || '')}</span></p>
+          <p class="admin-feed__sub">${escapeHtml(user.display_name || 'Sans nom')}${row.attachment_path ? ' · 📎 justificatif' : ''} · ${row.resolution_note ? escapeHtml(row.resolution_note) : 'sans note'} · par ${escapeHtml(row.reviewer_id || '?')}</p>
+        </div>
+        <span class="admin-feed__badge ${upheld ? 'admin-feed__badge--kept' : 'admin-feed__badge--failed'}">${upheld ? 'Accepté' : 'Rejeté'}</span>
+        <span class="history-item__chevron" aria-hidden="true">▾</span>
+      </button>
+      <div class="history-item__detail" hidden></div>
     `;
+
+    const head = li.querySelector('.history-item__head');
+    const detail = li.querySelector('.history-item__detail');
+    let loaded = false;
+
+    head.addEventListener('click', () => {
+      const open = detail.hidden;
+      detail.hidden = !open;
+      head.setAttribute('aria-expanded', String(open));
+      li.classList.toggle('is-open', open);
+      if (open && !loaded) {
+        loaded = true;
+        loadHistoryDetail(detail, row.id);
+      }
+    });
+
     return li;
   }
 
-  async function loadPhoto(li, storagePath) {
+  // Détail d'une décision passée, chargé à la première ouverture : mêmes
+  // éléments que la carte à trancher, en lecture seule.
+  async function loadHistoryDetail(detail, disputeId) {
+    detail.innerHTML = '<p class="admin-feed__sub">Chargement…</p>';
+
+    const { data: row, error } = await supabaseClient
+      .from('disputes')
+      .select(`
+        id, reason, status, filed_at, resolved_at, resolution_note, reviewer_id,
+        attachment_path, attachment_name,
+        user:profiles ( email ),
+        proof:proofs ( storage_path, ai_verdict, ai_confidence, ai_reason )
+      `)
+      .eq('id', disputeId)
+      .maybeSingle();
+
+    if (error || !row) {
+      detail.innerHTML = '<p class="dispute-card__error">Erreur de chargement : ' + escapeHtml(error ? error.message : 'contestation introuvable') + '</p>';
+      return;
+    }
+
+    const proof = row.proof || {};
+    const fmt = (iso) => (iso ? new Date(iso).toLocaleString('fr-FR', { dateStyle: 'short', timeStyle: 'short' }) : '?');
+
+    detail.innerHTML = `
+      <div class="dispute-card history-item__card">
+        <div class="dispute-card__photo" data-role="photo">
+          <span class="dispute-card__photo-placeholder">Chargement de la photo…</span>
+        </div>
+        <div class="dispute-card__body">
+          <p class="admin-feed__sub">${escapeHtml((row.user && row.user.email) || '')} · contestée le ${escapeHtml(fmt(row.filed_at))} · tranchée le ${escapeHtml(fmt(row.resolved_at))}</p>
+          <p class="dispute-card__reason"><strong>Raison de l'utilisateur :</strong> ${escapeHtml(row.reason)}</p>
+          ${row.proof ? `
+          <p class="dispute-card__ai">
+            <span class="admin-feed__badge ${proof.ai_verdict === 'fail' ? 'admin-feed__badge--failed' : ''}">${escapeHtml(VERDICT_LABELS[proof.ai_verdict] || 'IA : verdict inconnu')}</span>
+            ${proof.ai_confidence != null ? '<span class="admin-feed__sub" style="display:inline;">confiance ' + Math.round(proof.ai_confidence * 100) + '%</span>' : ''}
+          </p>
+          ${proof.ai_reason ? '<p class="admin-feed__sub">« ' + escapeHtml(proof.ai_reason) + ' »</p>' : ''}
+          ` : '<p class="dispute-card__ai"><span class="admin-feed__badge admin-feed__badge--failed">Aucune preuve envoyée</span></p>'}
+          <div class="dispute-card__attachment" data-role="attachment">
+            ${row.attachment_path ? '<span class="admin-feed__sub">Chargement du justificatif…</span>' : '<span class="admin-feed__sub">Aucun justificatif joint</span>'}
+          </div>
+          <p class="admin-feed__sub"><strong>Décision :</strong> ${row.status === 'upheld' ? 'acceptée' : 'rejetée'} par ${escapeHtml(row.reviewer_id || '?')}${row.resolution_note ? ' — ' + escapeHtml(row.resolution_note) : ''}</p>
+        </div>
+      </div>
+    `;
+
+    loadPhoto(detail, proof.storage_path, !row.proof);
+    if (row.attachment_path) loadAttachment(detail, row.attachment_path, row.attachment_name);
+  }
+
+  // Justificatif joint par l'utilisateur (`0071`) : image affichée, PDF en
+  // lien. Lien signé court, jamais public.
+  async function loadAttachment(li, path, name) {
+    const holder = li.querySelector('[data-role="attachment"]');
+    const { data, error } = await supabaseClient.storage.from('dispute-attachments').createSignedUrl(path, 3600);
+    if (error || !data) {
+      holder.innerHTML = '<span class="admin-feed__sub">Justificatif indisponible</span>';
+      return;
+    }
+    const label = name || path.split('/').pop();
+    const isImage = /\.(jpe?g|png|heic)$/i.test(path);
+    holder.innerHTML = '';
+    if (isImage) {
+      const img = document.createElement('img');
+      img.src = data.signedUrl;
+      img.alt = 'Justificatif';
+      img.loading = 'lazy';
+      makeZoomable(img);
+      holder.appendChild(img);
+    }
+    const a = document.createElement('a');
+    a.href = data.signedUrl;
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.className = 'dispute-card__attachment-link';
+    a.textContent = '📎 ' + label;
+    holder.appendChild(a);
+  }
+
+  async function loadPhoto(li, storagePath, noProof) {
     const holder = li.querySelector('[data-role="photo"]');
     if (!storagePath) {
-      holder.innerHTML = '<span class="dispute-card__photo-placeholder">Aucune photo</span>';
+      holder.innerHTML = '<span class="dispute-card__photo-placeholder">' + (noProof ? 'Aucune preuve envoyée' : 'Aucune photo') + '</span>';
       return;
     }
 
@@ -221,6 +367,7 @@ document.addEventListener('DOMContentLoaded', () => {
     img.src = data.signedUrl;
     img.alt = 'Preuve soumise';
     img.loading = 'lazy';
+    makeZoomable(img);
     holder.innerHTML = '';
     holder.appendChild(img);
   }
