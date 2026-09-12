@@ -65,7 +65,7 @@
     const span = wrap.offsetHeight - window.innerHeight;
     const raw = span > 0 ? clamp(-rect.top / span) : 1;
     const p = range(raw, SCATTER_START, SCATTER_END);
-    const small = coarse.matches;
+    const small = coarse.matches || window.innerWidth <= 768;
     const parallax = !reduce && !small;
     const spread = p >= 0.999;
 

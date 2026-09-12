@@ -189,6 +189,28 @@ img, svg { display: block; }
   transition: color .15s ease;
 }
 .nav__links a:hover { color: var(--ink-900); }
+
+/* Effet « roulette » : chaque lettre est une fenêtre qui laisse défiler une
+   colonne de caractères verticalement avant de s'arrêter sur la bonne. */
+.rls-char {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  height: 1.4em;
+  line-height: 1.4;
+  font: inherit;
+}
+.rls-char__reel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font: inherit;
+  transition: transform .5s cubic-bezier(.2,.85,.3,1);
+}
+/* Chaque case est plus grande que la lettre elle-même : un accent ou une
+   hampe ne déborde jamais sur la case voisine dans la colonne. */
+.rls-char__reel span { display: block; height: 1.4em; line-height: 1.4; font: inherit; }
 .nav__cursor {
   position: absolute;
   top: 4px;
@@ -492,6 +514,18 @@ img, svg { display: block; }
   .hero-split .container-scroll__header { text-align: center; }
   .hero-split .hero__lead { margin-left: auto; }
   .hero-split .store-badges { justify-content: center; }
+  /* Le titre + le texte sont plus hauts que le carrousel du téléphone :
+     la case fixée à 100vh + centrée + rognée coupait le haut du titre.
+     En dessous de 900px, la scène retrouve une hauteur naturelle et laisse
+     de la place sous la barre de navigation, fixe et transparente. */
+  .container-scroll { height: auto; }
+  .container-scroll__stage {
+    position: static;
+    height: auto;
+    overflow: visible;
+    display: block;
+    padding: 108px 0 40px;
+  }
 }
 .iphone-stage {
   display: flex;
@@ -1116,7 +1150,7 @@ img, svg { display: block; }
   margin: 0; color: #141414;
   font-size: 4.5vw; font-weight: 400; line-height: 1; letter-spacing: -0.025em;
 }
-.stack-spread__copy h2 span { opacity: .6; }
+.stack-spread__copy h2 span { color: var(--brand-start); }
 .stack-spread__cards { position: absolute; inset: 0; z-index: 10; }
 .stack-spread__card {
   position: absolute; left: 50%; top: 50%;
