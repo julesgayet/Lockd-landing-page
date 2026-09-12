@@ -9,9 +9,13 @@ document.addEventListener('DOMContentLoaded', () => {
   // ---------- Nav bar: transparent at top, tinted once scrolled ----------
   const nav = document.querySelector('.nav');
   if (nav) {
-    const SCROLL_THRESHOLD = 24;
+    // La barre reste transparente tant qu'on est sur le fond bleu du hero.
+    const hero = document.querySelector('.hero');
     const syncNavState = () => {
-      nav.classList.toggle('nav--scrolled', window.scrollY > SCROLL_THRESHOLD);
+      const scrolled = hero
+        ? hero.getBoundingClientRect().bottom <= nav.offsetHeight
+        : window.scrollY > 24;
+      nav.classList.toggle('nav--scrolled', scrolled);
     };
     syncNavState();
     window.addEventListener('scroll', syncNavState, { passive: true });
@@ -51,6 +55,39 @@ document.addEventListener('DOMContentLoaded', () => {
     navPill.addEventListener('mouseleave', () => {
       cursor.style.opacity = '0';
     });
+  }
+
+  // ---------- Hero : l'iPhone se couche et ses écrans ressortent en relief ----------
+  const csContainer = document.getElementById('containerScroll');
+  const csPhone = document.getElementById('csPhone');
+  const csFit = document.querySelector('.iphone-stage');
+  if (csContainer && csPhone && csFit) {
+    const pages = csPhone.querySelectorAll('.ui-page');
+    const ease = (t) => 1 - Math.pow(1 - t, 3);
+    let ticking = false;
+    const update = () => {
+      ticking = false;
+      const rect = csContainer.getBoundingClientRect();
+      const span = rect.height - window.innerHeight;
+      const raw = span > 0 ? -rect.top / span : 1;
+      const p = reduced ? 0.6 : ease(Math.min(1, Math.max(0, raw)));
+      csPhone.style.transform = `rotateX(${55 * p}deg) rotateZ(${-14 * p}deg) translateX(${-200 * p}px)`;
+      const narrow = window.innerWidth <= 900;
+      const colW = narrow ? window.innerWidth - 32 : csFit.parentElement.clientWidth / 2;
+      const fit = Math.min(1, (window.innerHeight - (narrow ? 420 : 110)) / 640, colW / (320 + 360 * p));
+      csFit.style.transform = `translateY(${28 + 20 * p}px) scale(${fit * (1 - 0.16 * p)})`;
+      // Les écrans sortent de l'iPhone en éventail : chacun plus haut et plus décalé
+      pages.forEach((el) => {
+        const i = Number(el.dataset.i) || 0;
+        // Au repos, « Tu t'es engagé » (le dernier écran) couvre les autres : il s'éloigne le premier.
+        el.style.transform = `translate3d(${i * 150 * p}px, ${-i * 30 * p}px, ${(i * 70 + 4) * p + 2 + i}px)`;
+      });
+      csPhone.classList.toggle('is-lifted', p > 0.15);
+    };
+    const request = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
+    update();
+    window.addEventListener('scroll', request, { passive: true });
+    window.addEventListener('resize', request);
   }
 
   // ---------- Hero rotating word ----------
