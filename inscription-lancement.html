@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Créer un compte : Lockd</title>
-<meta name="description" content="Crée ton compte Lockd." />
+<title>S'inscrire pour le lancement : Lockd</title>
+<meta name="description" content="Inscris-toi pour être prévenu·e dès la sortie de l'app Lockd." />
 <meta name="robots" content="noindex" />
 
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
@@ -19,7 +19,7 @@
 <!-- ================= NAV ================= -->
 <header class="nav" id="top">
   <div class="container nav__inner">
-    <a href="index.html" class="brand">
+    <a href="index.html" class="brand brand--shift">
       <span class="brand__mark" aria-hidden="true">
         <svg viewBox="0 0 1024 1024" width="42" height="42">
           <rect width="1024" height="1024" rx="230" fill="#000"/>
@@ -35,7 +35,7 @@
       <span class="nav__logout-label">Se déconnecter</span>
     </button>
 
-    <nav class="nav__links" id="navPill" aria-label="Navigation principale">
+    <nav class="nav__links nav__links--right" id="navPill" aria-label="Navigation principale">
       <span class="nav__cursor" aria-hidden="true"></span>
       <a href="index.html#comment">Comment ça marche</a>
       <a href="index.html#objectifs">Objectifs</a>
@@ -65,30 +65,41 @@
 <section class="auth-section">
   <div class="auth-section__glow" aria-hidden="true"></div>
   <div class="container">
-    <div class="auth-card">
+    <div class="auth-card" id="waitlistCard">
       <a href="index.html" class="auth-card__back">
         <svg viewBox="0 0 20 20" width="14" height="14" fill="none" aria-hidden="true"><path d="M12.5 4.5 7 10l5.5 5.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
         Retour à l'accueil
       </a>
 
-      <h1>Créer un compte</h1>
-      <p class="auth-card__lead">Ton compte fonctionne aussi bien ici que dans l'app Lockd. Inscris-toi une fois, retrouve-le partout.</p>
+      <span class="auth-badge">Bientôt disponible</span>
+      <h1>S'inscrire pour le lancement</h1>
+      <p class="auth-card__lead">Lockd n'est pas encore sur l'App Store. Laisse-nous de quoi te prévenir, par e-mail ou par SMS, le jour où tu pourras télécharger l'app.</p>
 
-      <form class="auth-form" id="signupForm" novalidate>
+      <form class="auth-form" id="waitlistForm" novalidate>
         <div class="auth-field">
-          <label for="name">Prénom</label>
-          <input type="text" id="name" name="name" placeholder="Ton prénom" autocomplete="given-name" required />
+          <label for="wlName">Prénom</label>
+          <input type="text" id="wlName" name="name" placeholder="Ton prénom" autocomplete="given-name" required />
         </div>
         <div class="auth-field">
-          <label for="email">Adresse e-mail</label>
-          <input type="email" id="email" name="email" placeholder="toi@email.com" autocomplete="email" required />
+          <label for="wlEmail">Adresse e-mail</label>
+          <input type="email" id="wlEmail" name="email" placeholder="toi@email.com" autocomplete="email" required />
         </div>
         <div class="auth-field">
-          <label for="password">Mot de passe</label>
-          <input type="password" id="password" name="password" placeholder="••••••••" autocomplete="new-password" minlength="6" required />
+          <label for="wlPhone">Numéro de téléphone</label>
+          <input type="tel" id="wlPhone" name="phone" placeholder="06 12 34 56 78" autocomplete="tel" required />
         </div>
-        <p class="auth-status" id="authStatus" hidden></p>
-        <button type="submit" class="btn btn--primary auth-submit">Créer mon compte</button>
+        <div class="auth-field">
+          <label for="wlHeardAbout">Comment nous as-tu connus ?</label>
+          <select id="wlHeardAbout" name="heardAbout" required>
+            <option value="" disabled selected>Choisis une réponse</option>
+            <option value="tiktok">TikTok</option>
+            <option value="instagram">Instagram</option>
+            <option value="amis">Amis</option>
+            <option value="autre">Autre</option>
+          </select>
+        </div>
+        <p class="auth-status" id="waitlistStatus" hidden></p>
+        <button type="submit" class="btn btn--primary auth-submit">M'inscrire</button>
       </form>
 
       <p class="auth-switch">Déjà un compte ? <a href="connexion.html">Se connecter</a></p>
@@ -144,6 +155,6 @@
 <script src="js/supabase-client.js?v=2"></script>
 <script src="js/main.js"></script>
 <script src="js/nav-auth.js"></script>
-<script src="js/auth-forms.js?v=7"></script>
+<script src="js/waitlist-form.js"></script>
 </body>
 </html>

@@ -158,6 +158,13 @@ img, svg { display: block; }
   gap: 10px;
   margin-right: auto;
 }
+/* Page d'inscription au lancement, écran de bureau uniquement : le logo
+   colle sinon tout contre le bord gauche, alors que cette page n'a pas le
+   badge App Store pour lui tenir compagnie. On le respire un peu vers
+   l'intérieur, sans toucher aux autres pages. */
+@media (min-width: 901px) {
+  .brand--shift { margin-left: 200px; }
+}
 .brand__mark { display: flex; flex-shrink: 0; }
 /* Le badge App Store vit dans la barre de nav, à côté du logo, à toutes les
    tailles — le hero ne le montre plus, donc rien ne le remplace ailleurs. */
@@ -201,6 +208,15 @@ img, svg { display: block; }
   transition: color .15s ease;
 }
 .nav__links a:hover { color: var(--ink-900); }
+
+/* Sur les pages d'auth (pas de hero à droite pour équilibrer), le menu
+   centré laissait un grand vide côté droit : on le décale contre le bord
+   du logo App Store / burger plutôt que de le garder au milieu de la barre. */
+.nav__links--right {
+  left: auto;
+  right: 0;
+  transform: translateY(-50%);
+}
 
 /* Effet « roulette » : chaque lettre est une fenêtre qui laisse défiler une
    colonne de caractères verticalement avant de s'arrêter sur la bonne. */
@@ -421,29 +437,49 @@ img, svg { display: block; }
   display: flex;
   flex-direction: column;
   align-self: flex-start;
-  gap: 4px;
-  height: 58px;
+  gap: 10px;
 }
 .auth-btn {
-  flex: 1;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0 16px;
-  border-radius: 8px;
-  font-size: 12.5px;
-  font-weight: 700;
   white-space: nowrap;
-  transition: transform .15s ease, opacity .15s ease;
+  border-radius: 999px;
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease, opacity .15s ease;
 }
-.auth-btn:hover { transform: translateY(-1px); }
+/* CTA principal : le seul geste qu'on demande avant la sortie de l'app,
+   donc large et épais pour porter tout le poids visuel de la paire — même
+   gabarit (pilule, dégradé, ombre portée) que les autres CTA du site
+   (.btn--primary), pour rester cohérent avec le reste de la page. */
 .auth-btn--primary {
+  padding: 18px 28px;
+  font-size: 16px;
+  font-weight: 800;
   background: linear-gradient(135deg, var(--brand-start), var(--brand-end));
   color: #fff;
+  box-shadow: 0 10px 28px rgba(74,93,247,0.35);
 }
+.auth-btn--primary:hover { transform: translateY(-2px); box-shadow: 0 14px 32px rgba(74,93,247,0.45); }
+/* "Se connecter" reste accessible mais discret : même largeur que le CTA
+   (héritée du flex-direction column, stretch par défaut) mais nettement
+   plus fine, pour ne pas rivaliser avec l'inscription. */
 .auth-btn--ghost {
+  padding: 10px 16px;
+  font-size: 12.5px;
+  font-weight: 700;
   border: 1px solid rgba(255,255,255,0.22);
   color: #fff;
+}
+.auth-btn--ghost:hover { transform: translateY(-1px); border-color: rgba(255,255,255,0.4); }
+
+/* Sur grand écran, le hero respire beaucoup plus : une pilule calée sur la
+   seule largeur de son texte paraissait chétive à côté du titre et du
+   téléphone. On lui donne une largeur minimale et un peu plus d'épaisseur
+   pour qu'elle tienne sa place de CTA principal de la page. */
+@media (min-width: 901px) {
+  .auth-buttons { gap: 12px; }
+  .auth-btn--primary { min-width: 340px; padding: 19px 36px; font-size: 17px; }
+  .auth-btn--ghost { padding: 12px 20px; font-size: 13.5px; }
 }
 
 .waitlist-note {
@@ -469,24 +505,6 @@ img, svg { display: block; }
   font-weight: 500;
 }
 .hero__trust-item svg { color: #6EE7B7; flex-shrink: 0; }
-
-/* ---- App fan (capture Photoroom, fond déjà détouré) ---- */
-.hero__visual {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 440px;
-}
-.app-fan {
-  width: 100%;
-  max-width: 560px;
-  height: auto;
-  filter: drop-shadow(0 24px 64px rgba(0,0,0,0.35));
-  /* Agrandi visuellement sans toucher au flux : le texte à côté ne
-     bouge pas, l'image déborde juste un peu de sa colonne. */
-  transform: scale(1.6);
-}
 
 /* ---- Container scroll (carte qui se redresse au défilement) ---- */
 .hero { padding: 0; overflow: clip; } /* clip et non hidden : hidden casse le sticky */

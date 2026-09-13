@@ -77,7 +77,8 @@
 .auth-form[hidden] { display: none; }
 .auth-field { display: flex; flex-direction: column; gap: 6px; }
 .auth-field label { font-size: 13px; font-weight: 700; color: var(--ink-700); }
-.auth-field input {
+.auth-field input,
+.auth-field select {
   padding: 12px 14px;
   border-radius: 10px;
   border: 1px solid var(--border);
@@ -88,7 +89,20 @@
   outline: none;
   transition: border-color .15s ease;
 }
-.auth-field input:focus { border-color: var(--brand-start); }
+.auth-field input:focus,
+.auth-field select:focus { border-color: var(--brand-start); }
+/* Le select garde l'apparence par défaut du système sur le triangle, mais
+   pas sur le reste : sans ça il n'a ni la même hauteur ni le même fond que
+   les champs texte juste au-dessus. */
+.auth-field select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%236B7280' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+}
+.auth-field select:invalid { color: var(--ink-500); }
 .auth-forgot {
   align-self: flex-end;
   font-size: 12.5px;
