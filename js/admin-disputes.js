@@ -99,7 +99,9 @@ document.addEventListener('DOMContentLoaded', () => {
   function closeLightbox() {
     if (!lightbox || lightbox.hidden) return;
     lightbox.hidden = true;
-    lightbox.querySelector('img').src = '';
+    // Pas de src vide : le navigateur la résout en URL de la page et
+    // affiche une image cassée.
+    lightbox.querySelector('img').removeAttribute('src');
     document.body.style.overflow = '';
   }
 

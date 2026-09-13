@@ -102,89 +102,110 @@ document.addEventListener('DOMContentLoaded', async () => {
     const codeSubmitBtn = codeForm.querySelector('.auth-submit');
     let pendingEmail = '';
 
-    // Si on revient tout juste du clic sur le lien reçu par e-mail,
-    // Supabase a déjà échangé le jeton présent dans l'URL contre une
-    // session au chargement de la page : on saute directement le
-    // formulaire.
-    let existingSession = null;
+    // Les formulaires sont interceptés tout de suite, avant toute attente :
+    // tant qu'aucun écouteur n'est posé, un clic fait envoyer le formulaire
+    // par le navigateur, qui recharge la page et vide le champ e-mail. C'est
+    // ce qui arrivait quand getSession() traînait (session expirée à
+    // rafraîchir, verrou tenu par un autre onglet) : chaque essai relançait
+    // la même attente, en boucle.
+    let sessionChecked = false;
+    loginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!sessionChecked) {
+        setStatus(status, 'Un instant, la page finit de se charger…', false);
+        return;
+      }
+      const email = loginForm.email.value.trim();
+
+      setLoading(submitBtn, true, defaultLabel);
+      if (status) status.hidden = true;
+
+      try {
+        const { error } = await withTimeout(
+          supabaseClient.auth.signInWithOtp({
+            email,
+            options: {
+              shouldCreateUser: false,
+              emailRedirectTo: window.location.href.split('#')[0].split('?')[0],
+            },
+          }),
+          15000
+        );
+
+        if (error) {
+          setStatus(status, readableAuthError(error), true);
+          return;
+        }
+
+        pendingEmail = email;
+        loginForm.hidden = true;
+        codeForm.hidden = false;
+        setStatus(codeStatus, "Code envoyé à " + email + '.', false);
+        codeForm.otpCode.focus();
+      } catch (err) {
+        console.error('Auth: erreur signInWithOtp', err);
+        setStatus(status, readableAuthError(err), true);
+      } finally {
+        setLoading(submitBtn, false, defaultLabel);
+      }
+    });
+
+    codeForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const token = codeForm.otpCode.value.trim();
+
+      setLoading(codeSubmitBtn, true, 'Valider le code');
+      if (codeStatus) codeStatus.hidden = true;
+
+      try {
+        const { data, error } = await withTimeout(
+          supabaseClient.auth.verifyOtp({
+            email: pendingEmail,
+            token,
+            type: 'email',
+          }),
+          15000
+        );
+
+        if (error) {
+          setStatus(codeStatus, /expired|invalid/i.test(error.message) ? 'Code invalide ou expiré, redemande-en un.' : readableAuthError(error), true);
+          return;
+        }
+
+        redirectIfAdminElseSuccess(loginForm.closest('.auth-card'), data.user && data.user.email);
+      } catch (err) {
+        console.error('Auth: erreur verifyOtp', err);
+        setStatus(codeStatus, readableAuthError(err), true);
+      } finally {
+        setLoading(codeSubmitBtn, false, 'Valider le code');
+      }
+    });
+
+    // Si on revient tout juste du clic sur le lien reçu par e-mail, ou si
+    // une session existe déjà, on saute le formulaire. L'attente est bornée :
+    // au-delà, on laisse simplement se connecter.
     try {
-      const res = await supabaseClient.auth.getSession();
-      existingSession = res.data.session;
+      const res = await withTimeout(supabaseClient.auth.getSession(), 4000);
+      const existingSession = res && res.data && res.data.session;
+      if (existingSession && existingSession.user) {
+        redirectIfAdminElseSuccess(loginForm.closest('.auth-card'), existingSession.user.email);
+        return;
+      }
     } catch (err) {
-      console.error('Auth: erreur getSession', err);
+      // Session locale cassée (jeton expiré qu'on n'arrive pas à
+      // rafraîchir) : on l'efface, sinon chaque visite referait la même
+      // attente et l'envoi du code pourrait se bloquer derrière.
+      console.error('Auth: session illisible, effacée pour permettre la connexion', err);
+      try {
+        Object.keys(localStorage)
+          .filter((key) => /^sb-.*-auth-token/.test(key))
+          .forEach((key) => localStorage.removeItem(key));
+      } catch (_) {
+        // Stockage inaccessible (navigation privée stricte) : rien à effacer.
+      }
     }
-
-    if (existingSession && existingSession.user) {
-      redirectIfAdminElseSuccess(loginForm.closest('.auth-card'), existingSession.user.email);
-    } else {
-      loginForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const email = loginForm.email.value.trim();
-
-        setLoading(submitBtn, true, defaultLabel);
-        if (status) status.hidden = true;
-
-        try {
-          const { error } = await withTimeout(
-            supabaseClient.auth.signInWithOtp({
-              email,
-              options: {
-                shouldCreateUser: false,
-                emailRedirectTo: window.location.href.split('#')[0].split('?')[0],
-              },
-            }),
-            15000
-          );
-
-          if (error) {
-            setStatus(status, readableAuthError(error), true);
-            return;
-          }
-
-          pendingEmail = email;
-          loginForm.hidden = true;
-          codeForm.hidden = false;
-          setStatus(codeStatus, "Code envoyé à " + email + '.', false);
-          codeForm.otpCode.focus();
-        } catch (err) {
-          console.error('Auth: erreur signInWithOtp', err);
-          setStatus(status, readableAuthError(err), true);
-        } finally {
-          setLoading(submitBtn, false, defaultLabel);
-        }
-      });
-
-      codeForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const token = codeForm.otpCode.value.trim();
-
-        setLoading(codeSubmitBtn, true, 'Valider le code');
-        if (codeStatus) codeStatus.hidden = true;
-
-        try {
-          const { data, error } = await withTimeout(
-            supabaseClient.auth.verifyOtp({
-              email: pendingEmail,
-              token,
-              type: 'email',
-            }),
-            15000
-          );
-
-          if (error) {
-            setStatus(codeStatus, /expired|invalid/i.test(error.message) ? 'Code invalide ou expiré, redemande-en un.' : readableAuthError(error), true);
-            return;
-          }
-
-          redirectIfAdminElseSuccess(loginForm.closest('.auth-card'), data.user && data.user.email);
-        } catch (err) {
-          console.error('Auth: erreur verifyOtp', err);
-          setStatus(codeStatus, readableAuthError(err), true);
-        } finally {
-          setLoading(codeSubmitBtn, false, 'Valider le code');
-        }
-      });
-    }
+    sessionChecked = true;
+    if (status && !status.classList.contains('auth-status--error')) status.hidden = true;
   }
 
   // ---------- Création de compte ----------
