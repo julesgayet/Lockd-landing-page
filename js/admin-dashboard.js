@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('adminUserEmail').textContent = email;
 
   document.getElementById('adminLogout').addEventListener('click', async () => {
-    await supabaseClient.auth.signOut();
+    await supabaseClient.auth.signOut({ scope: 'local' });
     window.location.href = 'index.html';
   });
 

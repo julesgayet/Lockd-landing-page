@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setLoggingOut(desktopBtn);
     setLoggingOut(mobileBtn);
     try {
-      await withTimeout(supabaseClient.auth.signOut(), 1500);
+      await withTimeout(supabaseClient.auth.signOut({ scope: 'local' }), 1500);
     } catch (err) {
       console.error('Nav: erreur signOut', err);
     }
