@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css" />
-<link rel="stylesheet" href="css/admin.css?v=6" />
+<link rel="stylesheet" href="css/admin.css?v=7" />
 </head>
 <body class="admin-body">
 
@@ -50,6 +50,7 @@
         Contestations
         <span class="admin-tab__count" id="disputesCount" hidden>0</span>
       </button>
+      <button class="admin-tab" id="tabAiResults" role="tab" aria-selected="false" aria-controls="panelAiResults" type="button">Résultat IA</button>
       <button class="admin-tab" id="tabAccounts" role="tab" aria-selected="false" aria-controls="panelAccounts" type="button">Comptes</button>
       <button class="admin-tab" id="tabStats" role="tab" aria-selected="false" aria-controls="panelStats" type="button">Statistiques</button>
     </nav>
@@ -109,6 +110,51 @@
           <h2>Historique des décisions</h2>
         </div>
         <ul class="admin-disputes admin-disputes--history" id="disputesHistory">
+          <li class="admin-feed__empty">Chargement…</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="panelAiResults" role="tabpanel" aria-labelledby="tabAiResults" hidden>
+      <section class="admin-stats admin-stats--ai">
+        <div class="admin-stat">
+          <p class="admin-stat__label">Décisions IA</p>
+          <p class="admin-stat__value" id="aiStatTotal">—</p>
+        </div>
+        <div class="admin-stat">
+          <p class="admin-stat__label">Conformes</p>
+          <p class="admin-stat__value" id="aiStatPass">—</p>
+        </div>
+        <div class="admin-stat">
+          <p class="admin-stat__label">Refusées</p>
+          <p class="admin-stat__value" id="aiStatFail">—</p>
+        </div>
+        <div class="admin-stat">
+          <p class="admin-stat__label">Contestées</p>
+          <p class="admin-stat__value" id="aiStatDisputed">—</p>
+        </div>
+      </section>
+
+      <div class="admin-panel">
+        <div class="admin-panel__head admin-panel__head--ai">
+          <h2>Toutes les décisions IA</h2>
+          <div class="ai-filters">
+            <select class="admin-select" id="aiFilterVerdict">
+              <option value="all">Tous les verdicts</option>
+              <option value="pass">Conforme</option>
+              <option value="fail">Refusé</option>
+              <option value="uncertain">Incertain</option>
+              <option value="none">Non traité</option>
+            </select>
+            <select class="admin-select" id="aiFilterDispute">
+              <option value="all">Contestées ou non</option>
+              <option value="disputed">Contestées uniquement</option>
+              <option value="none">Non contestées</option>
+            </select>
+            <input type="search" class="admin-search" id="aiFilterSearch" placeholder="Chercher par nom, email, objectif…" />
+          </div>
+        </div>
+        <ul class="admin-disputes admin-disputes--history" id="aiResultsList">
           <li class="admin-feed__empty">Chargement…</li>
         </ul>
       </div>
@@ -180,6 +226,7 @@
 <script src="js/supabase-client.js?v=2"></script>
 <script src="js/admin-dashboard.js?v=3"></script>
 <script src="js/admin-disputes.js?v=6"></script>
+<script src="js/admin-ai-results.js?v=1"></script>
 <script src="js/admin-accounts.js?v=2"></script>
 <script src="js/admin-stats.js?v=1"></script>
 </body>
