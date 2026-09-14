@@ -65,5 +65,16 @@ document.addEventListener('DOMContentLoaded', () => {
   if (mobileBtn) mobileBtn.addEventListener('click', logout);
 
   refresh();
-  supabaseClient.auth.onAuthStateChange(refresh);
+  // Jamais d'appel Supabase attendu dans ce rappel : il s'exécute pendant
+  // que verifyOtp tient le verrou interne du client, et un getSession()
+  // attendrait ce même verrou — interblocage, verifyOtp ne rend jamais la
+  // main (« Le serveur met trop de temps à répondre »). On sort du rappel
+  // et on lit la session qu'il fournit.
+  supabaseClient.auth.onAuthStateChange((_event, session) => {
+    setTimeout(() => {
+      const loggedIn = !!(session && session.user);
+      if (desktopBtn) desktopBtn.hidden = !loggedIn;
+      if (mobileBtn) mobileBtn.hidden = !loggedIn;
+    }, 0);
+  });
 });
