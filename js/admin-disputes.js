@@ -399,7 +399,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const list = document.getElementById('disputesPending');
     updateCount(list.querySelectorAll('.dispute-card').length);
     if (list.querySelectorAll('.dispute-card').length === 0) {
-      list.innerHTML = '<li class="admin-feed__empty">Aucune contestation en attente 🎉</li>';
+      list.innerHTML = '<li class="admin-feed__empty">Aucune contestation en attente.</li>';
     }
     loadHistory();
   }
