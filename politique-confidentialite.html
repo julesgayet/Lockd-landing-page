@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Politique de confidentialité : Lockd</title>
+<meta name="description" content="Comment Lockd collecte, utilise, protège et conserve tes données personnelles : compte, preuves photo, activité physique, paiement, et tes droits RGPD." />
+<meta name="robots" content="index, follow" />
+
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/auth.css?v=7" />
+<link rel="stylesheet" href="css/legal.css?v=2" />
+</head>
+<body>
+
+<!-- ================= NAV ================= -->
+<header class="nav" id="top">
+  <div class="container nav__inner">
+    <a href="index.html" class="brand">
+      <span class="brand__mark" aria-hidden="true">
+        <svg viewBox="0 0 1024 1024" width="42" height="42">
+          <rect width="1024" height="1024" rx="230" fill="#000"/>
+          <path d="M360 640 V370 A150 150 0 0 1 660 370 V470" fill="none" stroke="#fff" stroke-width="92" stroke-linecap="butt"/>
+          <rect x="314" y="620" width="420" height="150" fill="#fff"/>
+        </svg>
+      </span>
+      <span class="brand__name brand__name--lg">Lockd</span>
+    </a>
+
+    <button class="nav__logout" id="navLogout" type="button" hidden title="Se déconnecter">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" aria-hidden="true"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span class="nav__logout-label">Se déconnecter</span>
+    </button>
+
+    <nav class="nav__links" id="navPill" aria-label="Navigation principale">
+      <span class="nav__cursor" aria-hidden="true"></span>
+      <a href="index.html#comment">Comment ça marche</a>
+      <a href="index.html#objectifs">Objectifs</a>
+      <a href="index.html#confiance">Confiance</a>
+      <a href="index.html#faq">FAQ</a>
+    </nav>
+
+    <button class="nav__burger" id="burgerBtn" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <div class="nav__mobile" id="mobileMenu">
+    <a href="index.html#comment">Comment ça marche</a>
+    <a href="index.html#objectifs">Objectifs</a>
+    <a href="index.html#confiance">Confiance</a>
+    <a href="index.html#faq">FAQ</a>
+    <button class="nav__mobile-logout" id="navLogoutMobile" type="button" hidden>
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" aria-hidden="true"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span class="nav__logout-label">Se déconnecter</span>
+    </button>
+    <a href="index.html" class="btn btn--primary">Télécharger l'app</a>
+  </div>
+</header>
+
+<main>
+
+<!-- ================= EN-TÊTE ================= -->
+<section class="legal-hero">
+  <div class="legal-hero__glow" aria-hidden="true"></div>
+  <div class="container">
+    <div class="legal-hero__inner">
+      <a href="index.html" class="auth-card__back">
+        <svg viewBox="0 0 20 20" width="14" height="14" fill="none" aria-hidden="true"><path d="M12.5 4.5 7 10l5.5 5.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Retour à l'accueil
+      </a>
+      <span class="legal-hero__updated">
+        <svg viewBox="0 0 20 20" width="13" height="13" fill="none" aria-hidden="true"><path d="M10 5v5l3.5 2M17.5 10a7.5 7.5 0 1 1-15 0 7.5 7.5 0 0 1 15 0Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Dernière mise à jour : 14 septembre 2026 · version 1.0
+      </span>
+      <h1>Politique de confidentialité</h1>
+      <p>Cette page explique quelles données Lockd collecte — sur le site comme dans l'application —, pourquoi, avec qui elles sont partagées, combien de temps elles sont conservées, et comment exercer tes droits. Elle complète nos <a href="conditions-utilisation.html" style="color:#fff;text-decoration:underline;text-underline-offset:3px;">conditions d'utilisation</a>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTENU ================= -->
+<section class="legal-layout">
+  <div class="container">
+    <div class="legal-layout__inner">
+
+      <!-- Sommaire desktop -->
+      <nav class="legal-toc" aria-label="Sommaire">
+        <p class="legal-toc__title">Sommaire</p>
+        <ol id="legalToc">
+          <li><a href="#responsable">Responsable de traitement</a></li>
+          <li><a href="#donnees-collectees">Données collectées</a></li>
+          <li><a href="#sante">Données d'activité et de santé</a></li>
+          <li><a href="#finalites">Pourquoi on les utilise</a></li>
+          <li><a href="#partage">Avec qui elles sont partagées</a></li>
+          <li><a href="#transferts">Transferts hors Union européenne</a></li>
+          <li><a href="#conservation">Combien de temps on les garde</a></li>
+          <li><a href="#securite">Sécurité</a></li>
+          <li><a href="#droits">Tes droits</a></li>
+          <li><a href="#suppression">Supprimer ton compte</a></li>
+          <li><a href="#mineurs">Mineurs</a></li>
+          <li><a href="#cookies">Cookies et traceurs du site</a></li>
+          <li><a href="#modification">Modifications de cette politique</a></li>
+          <li><a href="#contact">Contact et réclamations</a></li>
+        </ol>
+      </nav>
+
+      <div class="legal-content">
+
+        <!-- Sommaire mobile -->
+        <details class="legal-toc-mobile">
+          <summary>Sommaire
+            <svg viewBox="0 0 20 20" width="14" height="14" fill="none" aria-hidden="true"><path d="m5 7.5 5 5 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </summary>
+          <ol>
+            <li><a href="#responsable">Responsable de traitement</a></li>
+            <li><a href="#donnees-collectees">Données collectées</a></li>
+            <li><a href="#sante">Données d'activité et de santé</a></li>
+            <li><a href="#finalites">Pourquoi on les utilise</a></li>
+            <li><a href="#partage">Avec qui elles sont partagées</a></li>
+            <li><a href="#transferts">Transferts hors Union européenne</a></li>
+            <li><a href="#conservation">Combien de temps on les garde</a></li>
+            <li><a href="#securite">Sécurité</a></li>
+            <li><a href="#droits">Tes droits</a></li>
+            <li><a href="#suppression">Supprimer ton compte</a></li>
+            <li><a href="#mineurs">Mineurs</a></li>
+            <li><a href="#cookies">Cookies et traceurs du site</a></li>
+            <li><a href="#modification">Modifications de cette politique</a></li>
+            <li><a href="#contact">Contact et réclamations</a></li>
+          </ol>
+        </details>
+
+        <section id="responsable">
+          <h2><span class="legal-num">§</span>Responsable de traitement</h2>
+          <p>Le responsable du traitement de tes données personnelles est l'éditeur de Lockd. Pour toute question relative à tes données, écris à <a class="legal-link" href="mailto:jules.gayet12@gmail.com">jules.gayet12@gmail.com</a> — c'est aujourd'hui le point de contact unique pour tout ce qui touche à la vie privée, y compris en l'absence de délégué à la protection des données désigné à ce stade.</p>
+          <div class="legal-todo">
+            <strong>Identité de la société — à compléter dès l'immatriculation.</strong> Comme indiqué dans les conditions d'utilisation, Lockd n'a pas encore de forme sociale enregistrée. La raison sociale, le SIRET et l'adresse du siège social viendront compléter cette section ; ils n'affectent pas les engagements pris ici sur le traitement de tes données.
+          </div>
+        </section>
+
+        <section id="donnees-collectees">
+          <h2><span class="legal-num">§</span>Données collectées</h2>
+          <p>Nous collectons uniquement ce qui est nécessaire au fonctionnement du service :</p>
+          <h3>Compte et profil</h3>
+          <ul>
+            <li>adresse e-mail (identifiant de connexion, communications relatives à ton compte) ;</li>
+            <li>nom affiché et, si tu l'actives, un nom d'utilisateur public (classement, profil visible par d'autres membres) ;</li>
+            <li>date de création du compte et d'achèvement de l'onboarding.</li>
+          </ul>
+          <h3>Paiement</h3>
+          <ul>
+            <li>identifiant client et identifiant de moyen de paiement chez notre prestataire Stripe ;</li>
+            <li>quatre derniers chiffres de la carte, marque et date d'expiration, à titre d'affichage uniquement (le numéro complet ne transite jamais par nos serveurs) ;</li>
+            <li>historique des mises, débits, tentatives de prélèvement et de leurs échecs éventuels.</li>
+          </ul>
+          <h3>Objectifs, preuves et vérification</h3>
+          <ul>
+            <li>le contenu de tes objectifs (titre, type, fenêtres de temps, instructions de preuve) ;</li>
+            <li>les photos que tu soumets comme preuve, leur horodatage, une empreinte technique de l'image (pour détecter une réutilisation) et, selon l'objectif, ta position au moment de la prise de vue ;</li>
+            <li>les métadonnées techniques de la photo (EXIF) et les signaux de contrôle anti-triche calculés par l'application ;</li>
+            <li>le verdict de vérification (accepté / refusé / en revue), le modèle d'intelligence artificielle utilisé, son niveau de confiance et sa justification ;</li>
+            <li>le contenu d'une contestation éventuelle et sa pièce jointe.</li>
+          </ul>
+          <h3>Consentements</h3>
+          <ul>
+            <li>l'horodatage de chaque acceptation des CGU ou d'un engagement de mise, la version acceptée, une empreinte du contenu accepté, ton adresse IP et le type d'appareil utilisé — conservés sous forme d'un journal inaltérable (chaque entrée est chaînée à la précédente), à seule fin de preuve en cas de litige.</li>
+          </ul>
+          <h3>Notifications</h3>
+          <ul>
+            <li>le jeton technique de notification push de ton appareil (aucune valeur en dehors de l'envoi de notifications), le modèle d'appareil et la version de l'app et du système, pour le bon acheminement des notifications ;</li>
+            <li>l'historique des notifications envoyées, pour diagnostiquer un problème d'acheminement si tu nous contactes.</li>
+          </ul>
+          <h3>Technique</h3>
+          <ul>
+            <li>adresse IP et informations d'appareil/navigateur, à des fins de sécurité et de lutte contre la fraude ;</li>
+            <li>journaux techniques de fonctionnement du service.</li>
+          </ul>
+        </section>
+
+        <section id="sante">
+          <h2><span class="legal-num">§</span>Données d'activité et de santé</h2>
+          <div class="legal-callout">
+            <span class="legal-callout__icon" aria-hidden="true">
+              <svg viewBox="0 0 20 20" width="15" height="15" fill="none"><path d="M10 6.5v4M10 13.2h.01M17.5 10a7.5 7.5 0 1 1-15 0 7.5 7.5 0 0 1 15 0Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <p>Pour un objectif lié au nombre de pas, l'application accède à tes données d'activité (pas, distance, étages montés/descendus, rythme) fournies par le système de ton téléphone (par exemple Apple Santé). Ces données relèvent, au sens du RGPD, d'une <strong>catégorie particulière de données</strong> (données de santé) : nous ne les collectons qu'avec ton <strong>consentement explicite</strong>, donné au moment où tu autorises l'accès depuis ton téléphone et où tu crées un objectif de ce type, et uniquement pour la durée et la finalité de cet objectif — jamais pour un profilage médical, jamais partagées avec un tiers publicitaire.</p>
+          </div>
+          <p>Tu peux retirer cet accès à tout moment depuis les réglages de ton téléphone ; les objectifs de pas en cours deviennent alors impossibles à prouver par ce biais.</p>
+        </section>
+
+        <section id="finalites">
+          <h2><span class="legal-num">§</span>Pourquoi on les utilise</h2>
+          <div class="legal-table-wrap">
+            <table class="legal-table">
+              <thead><tr><th>Finalité</th><th>Base légale</th></tr></thead>
+              <tbody>
+                <tr><td>Créer et gérer ton compte, faire fonctionner tes objectifs et tes mises</td><td>Exécution du contrat (CGU)</td></tr>
+                <tr><td>Traiter les paiements et les débits liés à un objectif non tenu</td><td>Exécution du contrat</td></tr>
+                <tr><td>Vérifier une preuve (intelligence artificielle puis, si besoin, examen humain)</td><td>Exécution du contrat</td></tr>
+                <tr><td>Détecter et prévenir la fraude (photo, position, comptes multiples)</td><td>Intérêt légitime à la sécurité du service et de ses membres</td></tr>
+                <tr><td>Collecter tes données d'activité physique pour un objectif de pas</td><td>Consentement explicite (donnée de santé)</td></tr>
+                <tr><td>T'envoyer des notifications liées à tes objectifs (push, e-mail)</td><td>Exécution du contrat</td></tr>
+                <tr><td>Répondre à tes demandes de support</td><td>Intérêt légitime / exécution du contrat</td></tr>
+                <tr><td>Conserver la comptabilité, répondre à une obligation fiscale ou légale</td><td>Obligation légale</td></tr>
+                <tr><td>Faire vivre le classement et le profil public, si tu l'actives</td><td>Consentement</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="partage">
+          <h2><span class="legal-num">§</span>Avec qui elles sont partagées</h2>
+          <p>Nous ne vendons aucune donnée. Elles sont partagées avec un nombre restreint de prestataires, chacun n'intervenant que sur ce dont il a besoin pour remplir sa fonction :</p>
+          <div class="legal-table-wrap">
+            <table class="legal-table">
+              <thead><tr><th>Prestataire</th><th>Rôle</th><th>Données concernées</th></tr></thead>
+              <tbody>
+                <tr><td>Supabase (hébergé sur AWS, Irlande — UE)</td><td>Base de données, authentification, stockage des fichiers</td><td>L'ensemble des données ci-dessus</td></tr>
+                <tr><td>Stripe</td><td>Traitement des paiements et prélèvements</td><td>Coordonnées de paiement, montants, historique de facturation</td></tr>
+                <tr><td>Anthropic</td><td>Analyse d'image par intelligence artificielle pour la vérification des preuves</td><td>La photo de preuve soumise, au moment de sa vérification</td></tr>
+                <tr><td>Apple</td><td>Envoi des notifications push, distribution de l'application, et données d'activité si tu y consens</td><td>Jeton de notification, données d'activité (Apple Santé)</td></tr>
+                <tr><td>Association que tu choisis</td><td>Bénéficiaire d'une partie d'une mise perdue</td><td>Uniquement le montant transféré — jamais ta preuve, ton profil ou tes autres données</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Nous pouvons également communiquer des données si la loi nous y oblige, ou pour faire valoir nos droits en cas de litige, de fraude avérée ou de menace pour la sécurité du service.</p>
+        </section>
+
+        <section id="transferts">
+          <h2><span class="legal-num">§</span>Transferts hors Union européenne</h2>
+          <p>Tes données sont hébergées dans l'Union européenne (Irlande). Certains de nos prestataires (Stripe, Anthropic) sont des sociétés dont le siège est situé hors de l'Union européenne et peuvent, dans ce cadre, traiter des données en dehors de l'UE. Ces transferts s'appuient sur les garanties reconnues par le RGPD — notamment les clauses contractuelles types de la Commission européenne — pour assurer un niveau de protection équivalent à celui de l'Union.</p>
+        </section>
+
+        <section id="conservation">
+          <h2><span class="legal-num">§</span>Combien de temps on les garde</h2>
+          <div class="legal-table-wrap">
+            <table class="legal-table">
+              <thead><tr><th>Donnée</th><th>Durée</th></tr></thead>
+              <tbody>
+                <tr><td>Compte et profil</td><td>Durée de vie du compte, puis suppression sous 30 jours après ta demande</td></tr>
+                <tr><td>Photos de preuve et verdicts de vérification</td><td>Jusqu'à l'expiration de la fenêtre de contestation, puis jusqu'à 13 mois pour couvrir une éventuelle contestation bancaire, puis suppression</td></tr>
+                <tr><td>Historique des mises, débits et factures</td><td>10 ans (obligation comptable et fiscale française)</td></tr>
+                <tr><td>Données d'activité physique (pas, distance...)</td><td>Durée de vie du compte, supprimées avec lui</td></tr>
+                <tr><td>Journal de consentement (CGU, engagements de mise)</td><td>5 ans après la fin de la relation, à titre de preuve</td></tr>
+                <tr><td>Jeton de notification push</td><td>Jusqu'à désinstallation de l'app ou révocation</td></tr>
+                <tr><td>Journaux techniques et anti-fraude</td><td>12 mois</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Passés ces délais, les données sont supprimées ou anonymisées de sorte à ne plus permettre de t'identifier.</p>
+        </section>
+
+        <section id="securite">
+          <h2><span class="legal-num">§</span>Sécurité</h2>
+          <p>Tes données sont chiffrées en transit et au repos chez notre hébergeur. L'accès à la base est cloisonné ligne par ligne (row-level security) : un compte ne peut lire que ses propres données, et seuls deux comptes administrateurs nommément identifiés peuvent, pour les besoins du support et de la modération, accéder aux données nécessaires au traitement d'une contestation ou d'un signalement — jamais aux moyens de paiement complets, que nous ne détenons pas.</p>
+          <p>Le journal de consentement est construit sous forme de chaîne d'empreintes (chaque entrée intègre l'empreinte de la précédente), ce qui rend une modification a posteriori détectable.</p>
+        </section>
+
+        <section id="droits">
+          <h2><span class="legal-num">§</span>Tes droits</h2>
+          <p>Conformément au RGPD, tu disposes des droits suivants sur tes données :</p>
+          <ul>
+            <li><strong>Accès</strong> : obtenir une copie des données que nous détenons sur toi ;</li>
+            <li><strong>Rectification</strong> : corriger une donnée inexacte ou incomplète ;</li>
+            <li><strong>Effacement</strong> : demander la suppression de tes données, dans les limites de nos obligations légales de conservation (§7) ;</li>
+            <li><strong>Limitation</strong> : demander la suspension temporaire d'un traitement contesté ;</li>
+            <li><strong>Portabilité</strong> : recevoir tes données dans un format structuré et couramment utilisé ;</li>
+            <li><strong>Opposition</strong> : t'opposer à un traitement fondé sur notre intérêt légitime ;</li>
+            <li><strong>Retrait du consentement</strong> à tout moment, pour les traitements qui en dépendent (données d'activité physique, notamment), sans remettre en cause la licéité du traitement effectué avant ce retrait.</li>
+          </ul>
+          <p>Pour exercer l'un de ces droits, écris à <a class="legal-link" href="mailto:jules.gayet12@gmail.com">jules.gayet12@gmail.com</a> depuis l'adresse e-mail associée à ton compte. Nous répondons sous un mois, délai pouvant être porté à deux mois pour une demande complexe — tu en serais alors informé.</p>
+        </section>
+
+        <section id="suppression">
+          <h2><span class="legal-num">§</span>Supprimer ton compte</h2>
+          <p>Tu peux demander la suppression de ton compte à tout moment depuis l'application ou en nous écrivant. Cette suppression entraîne l'effacement de ton profil, de tes photos de preuve et de tes données d'activité, à l'exception des données que nous devons conserver plus longtemps pour une obligation légale (notamment comptable et fiscale, voir §7) ou pour la gestion d'un litige en cours. C'est une action <strong>irréversible</strong>.</p>
+        </section>
+
+        <section id="mineurs">
+          <h2><span class="legal-num">§</span>Mineurs</h2>
+          <p>Lockd est réservé aux personnes de 18 ans et plus, en raison de l'engagement financier qu'implique le service. Nous ne collectons pas sciemment de données concernant des mineurs. Si tu penses qu'un compte a été créé par une personne mineure, écris-nous : nous procéderons aux vérifications et suppressions nécessaires.</p>
+        </section>
+
+        <section id="cookies">
+          <h2><span class="legal-num">§</span>Cookies et traceurs du site</h2>
+          <p>Ce site n'utilise pas de cookie publicitaire ni de traceur tiers à des fins de mesure d'audience. Il dépose uniquement les éléments techniques strictement nécessaires à la connexion (jeton de session géré par notre prestataire d'authentification), indispensables au fonctionnement du service et exemptés de consentement au sens de la réglementation sur les cookies.</p>
+        </section>
+
+        <section id="modification">
+          <h2><span class="legal-num">§</span>Modifications de cette politique</h2>
+          <p>Nous pouvons faire évoluer cette politique, notamment pour refléter un nouveau prestataire ou une évolution du service. Toute modification substantielle sera annoncée dans l'application avant sa prise d'effet ; la date de mise à jour en haut de cette page fait foi.</p>
+        </section>
+
+        <section id="contact">
+          <h2><span class="legal-num">§</span>Contact et réclamations</h2>
+          <p>Pour toute question sur cette politique ou pour exercer tes droits, contacte-nous — si tu estimes que tes droits ne sont pas respectés après nous avoir contactés, tu peux introduire une réclamation auprès de la <strong>CNIL</strong> (Commission nationale de l'informatique et des libertés), autorité française de contrôle, via <a class="legal-link" href="https://www.cnil.fr/fr/plaintes" target="_blank" rel="noopener">cnil.fr/fr/plaintes</a>.</p>
+          <div class="legal-contact">
+            <div>
+              <strong>Une question sur tes données ?</strong>
+              <p>Écris-nous, on répond nous-mêmes.</p>
+            </div>
+            <a class="btn btn--primary" href="mailto:jules.gayet12@gmail.com">jules.gayet12@gmail.com</a>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+  <div class="container footer__inner">
+    <div class="footer__brand">
+      <a href="index.html" class="brand">
+        <span class="brand__mark" aria-hidden="true">
+          <svg viewBox="0 0 1024 1024" width="28" height="28">
+            <rect width="1024" height="1024" rx="230" fill="#000"/>
+            <path d="M360 640 V370 A150 150 0 0 1 660 370 V470" fill="none" stroke="#fff" stroke-width="92" stroke-linecap="butt"/>
+            <rect x="314" y="620" width="420" height="150" fill="#fff"/>
+          </svg>
+        </span>
+        <span class="brand__name">Lockd</span>
+      </a>
+      <p class="footer__tagline">On ne laisse plus jamais rien tomber.</p>
+    </div>
+
+    <div class="footer__cols">
+      <div class="footer__col">
+        <p class="footer__colTitle">Produit</p>
+        <a href="index.html#comment">Comment ça marche</a>
+        <a href="index.html#objectifs">Objectifs</a>
+        <a href="index.html#confiance">Confiance &amp; sécurité</a>
+      </div>
+      <div class="footer__col">
+        <p class="footer__colTitle">Ressources</p>
+        <a href="index.html#faq">FAQ</a>
+        <a href="index.html">Télécharger</a>
+        <a href="index.html#contact">Contact</a>
+      </div>
+      <div class="footer__col">
+        <p class="footer__colTitle">Légal</p>
+        <a href="conditions-utilisation.html">Conditions d'utilisation</a>
+        <a href="politique-confidentialite.html">Politique de confidentialité</a>
+      </div>
+    </div>
+  </div>
+  <div class="container footer__bottom">
+    <p>© <span id="year"></span> Lockd. Tous droits réservés.</p>
+    <p class="footer__note">Lockd n'est pas un jeu d'argent : aucun hasard, aucun gain possible au-delà de la mise engagée.</p>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script src="js/supabase-client.js?v=2"></script>
+<script src="js/main.js"></script>
+<script src="js/nav-auth.js"></script>
+<script src="js/legal-toc.js"></script>
+</body>
+</html>

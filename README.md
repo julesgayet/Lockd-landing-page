@@ -35,9 +35,12 @@ de preview du panneau navigateur suffit.)
 - **Nom définitif** : « Lockd » est le nom de travail dans le repo, en attente
   de vérification INPI / domaine / App Store. Un simple rechercher-remplacer
   dans `index.html` suffira si le nom change.
-- **Pages légales** : les liens « Conditions d'utilisation » et « Politique
-  de confidentialité » du footer sont des ancres vides (`data-placeholder`)
-  — à brancher sur de vraies pages avant publication.
+- **Pages légales** : `conditions-utilisation.html` et
+  `politique-confidentialite.html` sont rédigées et branchées depuis le
+  footer. Il reste à compléter l'identité de la société (raison sociale,
+  SIRET, adresse du siège, capital social — voir les encarts `legal-todo`
+  en haut de chaque page) dès l'immatriculation, et à remplacer l'adresse
+  de contact provisoire par une adresse dédiée une fois le domaine choisi.
 - **Vraies captures d'écran** : le mockup du hero est recréé en CSS/HTML
   (l'interface iOS n'existe pas encore). À remplacer par de vrais screenshots
   une fois l'UI construite.

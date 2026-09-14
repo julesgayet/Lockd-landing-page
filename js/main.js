@@ -186,11 +186,4 @@ document.addEventListener('DOMContentLoaded', () => {
     riseTargets.forEach((el) => revealObserver.observe(el));
     fadeTargets.forEach((el) => revealObserver.observe(el));
   }
-
-  // ---------- Placeholder legal links ----------
-  document.querySelectorAll('a[data-placeholder="true"]').forEach((link) => {
-    link.addEventListener('click', (e) => {
-      e.preventDefault();
-    });
-  });
 });

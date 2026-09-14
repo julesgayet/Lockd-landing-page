@@ -218,27 +218,6 @@ img, svg { display: block; }
   transform: translateY(-50%);
 }
 
-/* Effet « roulette » : chaque lettre est une fenêtre qui laisse défiler une
-   colonne de caractères verticalement avant de s'arrêter sur la bonne. */
-.rls-char {
-  position: relative;
-  display: inline-block;
-  overflow: hidden;
-  vertical-align: bottom;
-  height: 1.4em;
-  line-height: 1.4;
-  font: inherit;
-}
-.rls-char__reel {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font: inherit;
-  transition: transform .5s cubic-bezier(.2,.85,.3,1);
-}
-/* Chaque case est plus grande que la lettre elle-même : un accent ou une
-   hampe ne déborde jamais sur la case voisine dans la colonne. */
-.rls-char__reel span { display: block; height: 1.4em; line-height: 1.4; font: inherit; }
 .nav__cursor {
   position: absolute;
   top: 4px;

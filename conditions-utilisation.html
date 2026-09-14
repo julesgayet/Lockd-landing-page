@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Conditions d'utilisation : Lockd</title>
+<meta name="description" content="Conditions générales d'utilisation et de vente de Lockd : création de compte, engagement d'une mise, vérification des preuves, contestations, paiement et résiliation." />
+<meta name="robots" content="index, follow" />
+
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/auth.css?v=7" />
+<link rel="stylesheet" href="css/legal.css?v=2" />
+</head>
+<body>
+
+<!-- ================= NAV ================= -->
+<header class="nav" id="top">
+  <div class="container nav__inner">
+    <a href="index.html" class="brand">
+      <span class="brand__mark" aria-hidden="true">
+        <svg viewBox="0 0 1024 1024" width="42" height="42">
+          <rect width="1024" height="1024" rx="230" fill="#000"/>
+          <path d="M360 640 V370 A150 150 0 0 1 660 370 V470" fill="none" stroke="#fff" stroke-width="92" stroke-linecap="butt"/>
+          <rect x="314" y="620" width="420" height="150" fill="#fff"/>
+        </svg>
+      </span>
+      <span class="brand__name brand__name--lg">Lockd</span>
+    </a>
+
+    <button class="nav__logout" id="navLogout" type="button" hidden title="Se déconnecter">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" aria-hidden="true"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span class="nav__logout-label">Se déconnecter</span>
+    </button>
+
+    <nav class="nav__links" id="navPill" aria-label="Navigation principale">
+      <span class="nav__cursor" aria-hidden="true"></span>
+      <a href="index.html#comment">Comment ça marche</a>
+      <a href="index.html#objectifs">Objectifs</a>
+      <a href="index.html#confiance">Confiance</a>
+      <a href="index.html#faq">FAQ</a>
+    </nav>
+
+    <button class="nav__burger" id="burgerBtn" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <div class="nav__mobile" id="mobileMenu">
+    <a href="index.html#comment">Comment ça marche</a>
+    <a href="index.html#objectifs">Objectifs</a>
+    <a href="index.html#confiance">Confiance</a>
+    <a href="index.html#faq">FAQ</a>
+    <button class="nav__mobile-logout" id="navLogoutMobile" type="button" hidden>
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" aria-hidden="true"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span class="nav__logout-label">Se déconnecter</span>
+    </button>
+    <a href="index.html" class="btn btn--primary">Télécharger l'app</a>
+  </div>
+</header>
+
+<main>
+
+<!-- ================= EN-TÊTE ================= -->
+<section class="legal-hero">
+  <div class="legal-hero__glow" aria-hidden="true"></div>
+  <div class="container">
+    <div class="legal-hero__inner">
+      <a href="index.html" class="auth-card__back">
+        <svg viewBox="0 0 20 20" width="14" height="14" fill="none" aria-hidden="true"><path d="M12.5 4.5 7 10l5.5 5.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Retour à l'accueil
+      </a>
+      <span class="legal-hero__updated">
+        <svg viewBox="0 0 20 20" width="13" height="13" fill="none" aria-hidden="true"><path d="M10 5v5l3.5 2M17.5 10a7.5 7.5 0 1 1-15 0 7.5 7.5 0 0 1 15 0Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Dernière mise à jour : 14 septembre 2026 · version 1.0
+      </span>
+      <h1>Conditions générales d'utilisation et de vente</h1>
+      <p>Elles décrivent comment fonctionne Lockd, ce qui se passe quand tu engages une mise sur un objectif, comment une preuve est vérifiée et payée, et ce que tu peux attendre de nous. Merci de les lire avant d'engager ton premier objectif.</p>
+      <p class="legal-hero__switch">Tu cherches plutôt la façon dont on traite tes données ? Direction la <a href="politique-confidentialite.html">politique de confidentialité</a>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTENU ================= -->
+<section class="legal-layout">
+  <div class="container">
+    <div class="legal-layout__inner">
+
+      <!-- Sommaire desktop -->
+      <nav class="legal-toc" aria-label="Sommaire">
+        <p class="legal-toc__title">Sommaire</p>
+        <ol id="legalToc">
+          <li><a href="#preambule">Préambule</a></li>
+          <li><a href="#definitions">Définitions</a></li>
+          <li><a href="#objet">Objet</a></li>
+          <li><a href="#acces">Accès au service</a></li>
+          <li><a href="#compte">Créer un compte</a></li>
+          <li><a href="#objectifs">Créer un objectif</a></li>
+          <li><a href="#mise">Engager une mise</a></li>
+          <li><a href="#preuve">Fournir une preuve</a></li>
+          <li><a href="#verification">Vérification de la preuve</a></li>
+          <li><a href="#contestation">Contester un refus</a></li>
+          <li><a href="#issue">Issue d'un objectif</a></li>
+          <li><a href="#don">Mise perdue et association</a></li>
+          <li><a href="#jeu">Ce n'est pas un jeu d'argent</a></li>
+          <li><a href="#activite">Pas, position et capteurs</a></li>
+          <li><a href="#paiement">Paiement et facturation</a></li>
+          <li><a href="#exclusion">Plafonds et blocage volontaire</a></li>
+          <li><a href="#comportements">Comportements interdits</a></li>
+          <li><a href="#suspension">Suspension et résiliation</a></li>
+          <li><a href="#propriete">Propriété intellectuelle</a></li>
+          <li><a href="#responsabilite">Responsabilité</a></li>
+          <li><a href="#donnees">Données personnelles</a></li>
+          <li><a href="#modification">Modification des présentes conditions</a></li>
+          <li><a href="#droit">Droit applicable et litiges</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ol>
+      </nav>
+
+      <div class="legal-content">
+
+        <!-- Sommaire mobile -->
+        <details class="legal-toc-mobile">
+          <summary>Sommaire
+            <svg viewBox="0 0 20 20" width="14" height="14" fill="none" aria-hidden="true"><path d="m5 7.5 5 5 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </summary>
+          <ol>
+            <li><a href="#preambule">Préambule</a></li>
+            <li><a href="#definitions">Définitions</a></li>
+            <li><a href="#objet">Objet</a></li>
+            <li><a href="#acces">Accès au service</a></li>
+            <li><a href="#compte">Créer un compte</a></li>
+            <li><a href="#objectifs">Créer un objectif</a></li>
+            <li><a href="#mise">Engager une mise</a></li>
+            <li><a href="#preuve">Fournir une preuve</a></li>
+            <li><a href="#verification">Vérification de la preuve</a></li>
+            <li><a href="#contestation">Contester un refus</a></li>
+            <li><a href="#issue">Issue d'un objectif</a></li>
+            <li><a href="#don">Mise perdue et association</a></li>
+            <li><a href="#jeu">Ce n'est pas un jeu d'argent</a></li>
+            <li><a href="#activite">Pas, position et capteurs</a></li>
+            <li><a href="#paiement">Paiement et facturation</a></li>
+            <li><a href="#exclusion">Plafonds et blocage volontaire</a></li>
+            <li><a href="#comportements">Comportements interdits</a></li>
+            <li><a href="#suspension">Suspension et résiliation</a></li>
+            <li><a href="#propriete">Propriété intellectuelle</a></li>
+            <li><a href="#responsabilite">Responsabilité</a></li>
+            <li><a href="#donnees">Données personnelles</a></li>
+            <li><a href="#modification">Modification des présentes conditions</a></li>
+            <li><a href="#droit">Droit applicable et litiges</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ol>
+        </details>
+
+        <section id="preambule">
+          <h2><span class="legal-num">§</span>Préambule</h2>
+          <p><strong>Lockd</strong> est un service qui t'aide à tenir tes objectifs personnels en y associant une mise en argent : tu déclares un objectif, tu engages une somme, et tu dois en apporter la preuve dans le délai que tu t'es fixé. Si tu tiens ton objectif, ta mise ne t'est jamais prélevée. Si tu ne le tiens pas — ou si tu ne le prouves pas à temps — elle est débitée et reversée, pour l'essentiel, à une association que tu choisis toi-même.</p>
+          <p>Le service comprend l'application mobile Lockd (disponible sur l'App Store) et le présent site, utilisé pour la création de compte, la connexion et l'information du public. Les deux s'appuient sur la même base de comptes : ce que tu fais sur l'un se répercute sur l'autre.</p>
+          <div class="legal-todo">
+            <strong>Éditeur du service — informations en cours de finalisation.</strong> Lockd est, à ce stade, un projet en développement, pas encore immatriculé (voir la note du dépôt de code sur la vérification INPI / du nom / du domaine en cours). La raison sociale, le SIRET, l'adresse du siège social et le capital social viendront compléter cette section dès l'immatriculation — en attendant, le point de contact ci-dessous fait foi pour toute question.
+          </div>
+          <p>Éditeur (à ce stade) : Lockd, contact <a class="legal-link" href="mailto:jules.gayet12@gmail.com">jules.gayet12@gmail.com</a>. Hébergement des données : Supabase (base de données, authentification et stockage), infrastructure AWS région Irlande (Union européenne).</p>
+        </section>
+
+        <section id="definitions">
+          <h2><span class="legal-num">§</span>Définitions</h2>
+          <ul>
+            <li><strong>Objectif</strong> : l'action que tu t'engages à accomplir (une séance de sport, une habitude hebdomadaire, un nombre de pas, une présence dans une zone à un horaire donné...), avec une fenêtre de temps pour la prouver.</li>
+            <li><strong>Mise</strong> : la somme d'argent que tu engages sur un objectif au moment où tu le valides, dans la limite de tes plafonds (voir §16).</li>
+            <li><strong>Preuve</strong> : la photo — et les données techniques qui l'accompagnent (horodatage, position le cas échéant) — que tu soumets pour démontrer que l'objectif est tenu.</li>
+            <li><strong>Vérification</strong> : l'examen de la preuve, effectué par un modèle d'intelligence artificielle puis, si besoin, par un examen humain (voir §9).</li>
+            <li><strong>Contestation</strong> : la procédure qui te permet de demander un second avis humain lorsque la preuve a été refusée (voir §10).</li>
+            <li><strong>Association</strong> (ou « cause ») : l'organisme à but non lucratif partenaire de Lockd, choisi par tes soins, qui reçoit une partie d'une mise perdue.</li>
+            <li><strong>Compte</strong> : l'accès personnel que tu crées avec ton adresse e-mail, commun à l'application et au site.</li>
+          </ul>
+        </section>
+
+        <section id="objet">
+          <h2><span class="legal-num">§</span>Objet</h2>
+          <p>Les présentes conditions générales d'utilisation et de vente (« CGU ») régissent l'accès et l'usage de Lockd, ainsi que les ventes qui en découlent (mises engagées, abonnement le cas échéant). Elles s'appliquent à toute personne qui crée un compte, que ce soit depuis l'application ou depuis ce site — leur acceptation est une condition d'accès au service.</p>
+          <p>Tu acceptes les présentes CGU en cochant la case prévue à cet effet lors de la création de ton compte, puis, à chaque nouvel engagement, en validant l'écran de récapitulatif de ta mise. Chaque acceptation est horodatée et conservée avec la version des CGU en vigueur ce jour-là, afin de pouvoir être présentée en cas de litige.</p>
+        </section>
+
+        <section id="acces">
+          <h2><span class="legal-num">§</span>Accès au service</h2>
+          <p>Pour utiliser Lockd, tu dois :</p>
+          <ul>
+            <li>avoir <strong>18 ans révolus</strong> et la capacité juridique de contracter ;</li>
+            <li>disposer d'une adresse e-mail valide et d'un moyen de paiement à ton nom, accepté par notre prestataire de paiement ;</li>
+            <li>utiliser le service pour ton propre compte, et non pour le compte d'un tiers ;</li>
+            <li>fournir des informations exactes lors de la création de compte et les maintenir à jour.</li>
+          </ul>
+          <p>Un compte est personnel et non transférable. Tu es responsable de la confidentialité de l'accès à ton compte (boîte e-mail associée, code de connexion reçu par e-mail) et de tout ce qui en découle.</p>
+        </section>
+
+        <section id="compte">
+          <h2><span class="legal-num">§</span>Créer un compte</h2>
+          <p>La création de compte se fait avec ton adresse e-mail. Il n'y a pas de mot de passe : la connexion se fait par un code à usage unique envoyé par e-mail (« magic link » / OTP), généré et vérifié par notre prestataire d'authentification.</p>
+          <p>Tu peux créer ton compte depuis l'application ou depuis ce site (<a class="legal-link" href="creer-un-compte.html">creer-un-compte.html</a>) : c'est le même compte des deux côtés.</p>
+        </section>
+
+        <section id="objectifs">
+          <h2><span class="legal-num">§</span>Créer un objectif</h2>
+          <p>Depuis l'application, tu choisis un type d'objectif dans le catalogue proposé (séance ponctuelle, objectif hebdomadaire répété sur plusieurs séances, nombre de pas, présence dans une zone géographique définie à un horaire précis...), tu définis la fenêtre de temps dans laquelle tu dois apporter ta preuve, et tu peux préciser une instruction sur la nature de la preuve attendue.</p>
+          <p>Un objectif hebdomadaire génère une ligne par séance : tu dois prouver chaque séance individuellement dans sa propre fenêtre.</p>
+          <p>Un objectif reste à l'état de brouillon tant qu'aucune mise n'y est associée et validée — il n'engage rien tant que tu n'es pas passé à l'étape suivante.</p>
+        </section>
+
+        <section id="mise">
+          <h2><span class="legal-num">§</span>Engager une mise</h2>
+          <p>Pour activer un objectif, tu engages une mise en euros, dans la limite de ton plafond par objectif et de ton plafond mensuel (voir §16). Cet engagement se fait via un écran de récapitulatif qui affiche le montant, l'association qui recevra une part de la mise si tu ne tiens pas ton objectif, et la part correspondante — tu dois valider explicitement cet écran pour que la mise soit prise en compte.</p>
+          <p>Ta carte bancaire est enregistrée auprès de notre prestataire de paiement (Stripe) au moment où tu configures ton moyen de paiement, mais <strong>aucun débit n'a lieu au moment où tu engages une mise</strong> : le prélèvement n'intervient, le cas échéant, qu'à l'issue de l'objectif (voir §11).</p>
+          <p>Chaque engagement de mise fait l'objet d'un enregistrement de consentement horodaté (identifiant de version des CGU, empreinte du contenu accepté, adresse IP, type d'appareil), conservé de façon à ce qu'une modification ultérieure des CGU ou de tes plafonds ne puisse pas être appliquée rétroactivement à un engagement déjà pris.</p>
+        </section>
+
+        <section id="preuve">
+          <h2><span class="legal-num">§</span>Fournir une preuve</h2>
+          <p>Une fois la fenêtre de preuve ouverte, tu disposes du délai indiqué dans l'objectif pour soumettre une photo prise en direct depuis l'application. La prise de vue est accompagnée automatiquement de son horodatage et, selon le type d'objectif, de ta position au moment de la prise de vue.</p>
+          <p>L'application effectue des vérifications techniques sur l'appareil avant l'envoi (cohérence de l'horodatage, de la position, absence de manipulation détectable) : une preuve qui échoue à ces vérifications peut être refusée avant même d'atteindre notre système de vérification.</p>
+          <p>Une preuve reçue avant l'ouverture de la fenêtre, ou une image déjà utilisée pour une autre preuve, est refusée automatiquement : ce sont les deux seuls cas où le refus n'implique ni intelligence artificielle ni relecture humaine, car il s'agit de fraudes déjà établies par construction.</p>
+        </section>
+
+        <section id="verification">
+          <h2><span class="legal-num">§</span>Vérification de la preuve</h2>
+          <p>Chaque preuve recevable est examinée par un modèle d'intelligence artificielle d'analyse d'image, chargé de juger si elle correspond à l'objectif déclaré. Sa réponse ne vaut jamais, à elle seule, refus définitif : elle passe systématiquement par nos règles internes, qui peuvent renvoyer le dossier vers un examinateur humain en cas de doute, quelle que soit la conclusion du modèle.</p>
+          <p>Toute indisponibilité technique de notre côté (service injoignable, image illisible...) se traduit par une nouvelle demande de preuve, jamais par un refus — le doute technique ne peut jamais te coûter ta mise.</p>
+          <div class="legal-callout">
+            <span class="legal-callout__icon" aria-hidden="true">
+              <svg viewBox="0 0 20 20" width="15" height="15" fill="none"><path d="M10 6.5v4M10 13.2h.01M17.5 10a7.5 7.5 0 1 1-15 0 7.5 7.5 0 0 1 15 0Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <p>Le verdict rendu (accepté, refusé, ou renvoyé en revue), le modèle utilisé et le niveau de confiance sont conservés avec la preuve, pour pouvoir être réexaminés en cas de contestation ou de litige, y compris plusieurs mois après.</p>
+          </div>
+        </section>
+
+        <section id="contestation">
+          <h2><span class="legal-num">§</span>Contester un refus</h2>
+          <p>Si ta preuve est refusée, tu disposes de <strong>24 heures</strong> à compter du verdict pour ouvrir une contestation depuis l'application, en expliquant ta situation et, si utile, en joignant un document complémentaire. Passé ce délai sans contestation, le refus devient définitif et l'objectif est considéré comme non tenu.</p>
+          <p>Une contestation est tranchée par un examinateur humain, qui peut soit lever le refus (ta mise est alors libérée, sans débit), soit le confirmer (l'objectif est clos comme non tenu). Cette décision est finale. Une contestation jugée manifestement abusive est signalée comme telle et conservée à ce titre, sans que cela n'affecte automatiquement ta capacité à utiliser le service pour tes prochains objectifs.</p>
+        </section>
+
+        <section id="issue">
+          <h2><span class="legal-num">§</span>Issue d'un objectif</h2>
+          <p>Un objectif se termine dans l'un de ces trois états :</p>
+          <ul>
+            <li><strong>Tenu</strong> : la preuve est acceptée (directement ou après contestation). Ta mise est intégralement libérée — aucun débit n'a lieu.</li>
+            <li><strong>Non tenu</strong> : aucune preuve recevable n'a été apportée dans les temps, la preuve a été refusée sans contestation dans le délai imparti, ou la contestation a été rejetée. Ta mise est débitée dans les conditions du §14.</li>
+            <li><strong>Annulé</strong> : l'objectif est retiré avant l'ouverture de sa fenêtre de preuve, dans les cas prévus par l'application (par exemple une annulation avant engagement effectif de la mise). Aucun débit n'a lieu.</li>
+          </ul>
+        </section>
+
+        <section id="don">
+          <h2><span class="legal-num">§</span>Mise perdue et association</h2>
+          <p>Lorsqu'une mise est débitée parce que l'objectif n'a pas été tenu, elle est répartie entre l'association que tu as choisie au moment de l'engagement et Lockd, selon la répartition qui t'a été indiquée et que tu as acceptée avant de valider ta mise sur cet objectif précis.</p>
+          <p>Lockd choisit ses associations partenaires avec soin, mais n'est ni gestionnaire ni garant de leur fonctionnement : nous transmettons les fonds collectés selon nos accords avec chacune d'elles, sans être responsables de l'usage qu'elles en font une fois versés.</p>
+        </section>
+
+        <section id="jeu">
+          <h2><span class="legal-num">§</span>Ce n'est pas un jeu d'argent</h2>
+          <div class="legal-callout legal-callout--brand">
+            <span class="legal-callout__icon" aria-hidden="true">
+              <svg viewBox="0 0 20 20" width="15" height="15" fill="none"><path d="m5 10 3.5 3.5L15 6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <p><strong>Lockd n'est pas un jeu d'argent et n'est pas soumis à la réglementation des jeux d'argent et de hasard.</strong> Aucun élément de hasard ne détermine l'issue d'un objectif : celle-ci dépend uniquement de faits vérifiables (as-tu, ou non, apporté une preuve recevable de ce que tu t'étais engagé à faire). Il n'existe aucune possibilité de gain supérieur à la mise engagée — au mieux, tu la récupères intégralement (elle n'est jamais débitée) ; au pire, tu la perds. Il n'y a jamais de somme à recevoir au-delà de ce que tu as toi-même engagé.</p>
+          </div>
+        </section>
+
+        <section id="activite">
+          <h2><span class="legal-num">§</span>Pas, position et capteurs de l'appareil</h2>
+          <p>Certains objectifs (nombre de pas, présence dans une zone donnée) s'appuient sur les capteurs de mouvement et de localisation de ton appareil, ainsi que, pour les objectifs de pas, sur les données d'activité mises à disposition par le système d'exploitation (par exemple Apple Santé). Ces données ne sont collectées que pour les objectifs concernés, avec ton accord explicite, et incluent des signaux techniques anti-triche destinés à détecter une position ou une activité simulée par un logiciel.</p>
+          <p>Le détail de ce qui est collecté, pourquoi, et combien de temps c'est conservé figure dans la <a class="legal-link" href="politique-confidentialite.html#donnees-collectees">politique de confidentialité</a>.</p>
+        </section>
+
+        <section id="paiement">
+          <h2><span class="legal-num">§</span>Paiement et facturation</h2>
+          <p>Les paiements sont traités par <strong>Stripe</strong>, prestataire de paiement tiers certifié PCI-DSS. Lockd ne stocke jamais le numéro complet de ta carte bancaire — seuls les quatre derniers chiffres, la marque et la date d'expiration nous sont transmis pour affichage dans l'application.</p>
+          <p>Lorsqu'un débit est dû (objectif non tenu), il est prélevé sur le moyen de paiement enregistré, en euros. En cas d'échec de prélèvement, plusieurs tentatives peuvent être effectuées ; un solde impayé reste dû et peut bloquer l'engagement de nouvelles mises jusqu'à régularisation.</p>
+          <p>Si Lockd propose un abonnement payant, son prix, sa périodicité et ses conditions de résiliation te sont présentés avant toute souscription depuis l'application ; sa résiliation prend effet à la fin de la période en cours, sans remboursement au prorata sauf disposition contraire affichée au moment de la souscription.</p>
+        </section>
+
+        <section id="exclusion">
+          <h2><span class="legal-num">§</span>Plafonds et blocage volontaire</h2>
+          <p>Chaque compte dispose d'un plafond par objectif et d'un plafond mensuel cumulé, fixés par défaut et modifiables depuis l'application — toute augmentation de plafond nécessite un nouveau consentement explicite de ta part, distinct de celui donné à la création du compte.</p>
+          <p>Tu peux à tout moment bloquer volontairement la possibilité d'engager de nouvelles mises sur ton compte depuis l'application. Lockd peut également activer ce blocage de sa propre initiative en cas de suspicion de fraude, d'impayé, ou pour toute autre raison légitime, et t'en informe.</p>
+        </section>
+
+        <section id="comportements">
+          <h2><span class="legal-num">§</span>Comportements interdits</h2>
+          <p>Il est notamment interdit de :</p>
+          <ul>
+            <li>soumettre une preuve falsifiée, réutilisée, ou obtenue par un moyen visant à tromper la vérification (photo antérieure, image générée, position simulée par logiciel...) ;</li>
+            <li>ouvrir une contestation de mauvaise foi, dans le but de faire lever un refus justifié ;</li>
+            <li>créer ou utiliser plusieurs comptes pour contourner tes plafonds ou un blocage volontaire ou administratif ;</li>
+            <li>utiliser le service à des fins autres que ton usage personnel, ou tenter d'accéder au compte d'un tiers ;</li>
+            <li>perturber le fonctionnement technique du service (rétro-ingénierie, extraction massive de données, contournement des mesures anti-triche).</li>
+          </ul>
+          <p>Une fraude avérée sur une preuve entraîne la clôture de l'objectif concerné comme non tenu et peut, selon sa gravité, donner lieu à une suspension ou une résiliation du compte dans les conditions du §17.</p>
+        </section>
+
+        <section id="suspension">
+          <h2><span class="legal-num">§</span>Suspension et résiliation</h2>
+          <p>Tu peux cesser d'utiliser Lockd à tout moment. La suppression de ton compte peut être demandée depuis l'application ou en écrivant à <a class="legal-link" href="mailto:jules.gayet12@gmail.com">jules.gayet12@gmail.com</a> ; elle est irréversible et entraîne la clôture de tes objectifs en cours selon les règles habituelles (une mise déjà engagée sur un objectif non encore résolu suit son cours normal jusqu'à son issue).</p>
+          <p>Lockd peut suspendre ou résilier ton accès au service, à tout moment et sans préavis en cas de manquement grave aux présentes CGU (fraude avérée, comportement mentionné au §17), ou avec un préavis raisonnable dans les autres cas. Une résiliation à l'initiative de Lockd ne dispense pas des sommes déjà dues au titre d'objectifs non tenus antérieurement.</p>
+        </section>
+
+        <section id="propriete">
+          <h2><span class="legal-num">§</span>Propriété intellectuelle</h2>
+          <p>L'application, le site, leur design, leur code et leur marque « Lockd » sont la propriété de leur éditeur ou de ses concédants. Aucune disposition des présentes CGU ne te transfère de droit sur ces éléments au-delà d'un droit d'usage personnel du service, non exclusif et non transférable.</p>
+          <p>Les photos que tu soumets comme preuve restent ta propriété ; tu nous accordes le droit de les traiter, stocker et faire analyser (y compris par un prestataire d'intelligence artificielle) dans la seule mesure nécessaire à la vérification de tes objectifs et à la gestion d'éventuelles contestations ou litiges.</p>
+        </section>
+
+        <section id="responsabilite">
+          <h2><span class="legal-num">§</span>Responsabilité</h2>
+          <p>Lockd met en œuvre des moyens raisonnables pour assurer la disponibilité et la fiabilité du service, sans garantir une disponibilité continue (maintenance, panne d'un prestataire tiers, cas de force majeure). En cas d'indisponibilité empêchant la soumission ou la vérification d'une preuve dans les temps, nous cherchons une solution équitable (report de fenêtre, annulation sans débit) plutôt qu'un débit automatique.</p>
+          <p>Lockd ne saurait être tenu responsable des décisions personnelles, sportives ou financières que tu prends en te fondant sur le service, ni d'un usage du service contraire aux présentes CGU. Notre responsabilité, lorsqu'elle est engagée, est limitée au montant de la mise concernée par le litige, sauf faute lourde ou dol.</p>
+        </section>
+
+        <section id="donnees">
+          <h2><span class="legal-num">§</span>Données personnelles</h2>
+          <p>Le traitement de tes données personnelles — ce que nous collectons, pourquoi, avec qui nous le partageons et combien de temps nous le conservons — est décrit intégralement dans notre <a class="legal-link" href="politique-confidentialite.html">politique de confidentialité</a>, qui fait partie intégrante des présentes CGU.</p>
+        </section>
+
+        <section id="modification">
+          <h2><span class="legal-num">§</span>Modification des présentes conditions</h2>
+          <p>Nous pouvons modifier ces CGU, notamment pour refléter une évolution du service, de la réglementation ou de nos prestataires. Toute modification substantielle te sera présentée avant sa prise d'effet, sous la forme d'un nouvel écran d'acceptation ; elle ne s'applique jamais rétroactivement aux mises déjà engagées sous une version antérieure.</p>
+        </section>
+
+        <section id="droit">
+          <h2><span class="legal-num">§</span>Droit applicable et litiges</h2>
+          <p>Les présentes CGU sont soumises au droit français. En cas de litige, tu peux nous contacter directement à <a class="legal-link" href="mailto:jules.gayet12@gmail.com">jules.gayet12@gmail.com</a> pour rechercher une solution amiable avant toute action judiciaire.</p>
+          <p>Si tu es un consommateur résidant dans l'Union européenne, tu conserves le bénéfice des dispositions impératives de la loi de ton pays de résidence lorsqu'elles te sont plus favorables, et tu peux recourir à la plateforme européenne de règlement en ligne des litiges (<a class="legal-link" href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">ec.europa.eu/consumers/odr</a>) ou à un médiateur de la consommation, dont les coordonnées seront précisées ici dès l'immatriculation de la société éditrice.</p>
+        </section>
+
+        <section id="contact">
+          <h2><span class="legal-num">§</span>Contact</h2>
+          <div class="legal-contact">
+            <div>
+              <strong>Une question sur ces conditions ?</strong>
+              <p>Écris-nous, on répond nous-mêmes.</p>
+            </div>
+            <a class="btn btn--primary" href="mailto:jules.gayet12@gmail.com">jules.gayet12@gmail.com</a>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+  <div class="container footer__inner">
+    <div class="footer__brand">
+      <a href="index.html" class="brand">
+        <span class="brand__mark" aria-hidden="true">
+          <svg viewBox="0 0 1024 1024" width="28" height="28">
+            <rect width="1024" height="1024" rx="230" fill="#000"/>
+            <path d="M360 640 V370 A150 150 0 0 1 660 370 V470" fill="none" stroke="#fff" stroke-width="92" stroke-linecap="butt"/>
+            <rect x="314" y="620" width="420" height="150" fill="#fff"/>
+          </svg>
+        </span>
+        <span class="brand__name">Lockd</span>
+      </a>
+      <p class="footer__tagline">On ne laisse plus jamais rien tomber.</p>
+    </div>
+
+    <div class="footer__cols">
+      <div class="footer__col">
+        <p class="footer__colTitle">Produit</p>
+        <a href="index.html#comment">Comment ça marche</a>
+        <a href="index.html#objectifs">Objectifs</a>
+        <a href="index.html#confiance">Confiance &amp; sécurité</a>
+      </div>
+      <div class="footer__col">
+        <p class="footer__colTitle">Ressources</p>
+        <a href="index.html#faq">FAQ</a>
+        <a href="index.html">Télécharger</a>
+        <a href="index.html#contact">Contact</a>
+      </div>
+      <div class="footer__col">
+        <p class="footer__colTitle">Légal</p>
+        <a href="conditions-utilisation.html">Conditions d'utilisation</a>
+        <a href="politique-confidentialite.html">Politique de confidentialité</a>
+      </div>
+    </div>
+  </div>
+  <div class="container footer__bottom">
+    <p>© <span id="year"></span> Lockd. Tous droits réservés.</p>
+    <p class="footer__note">Lockd n'est pas un jeu d'argent : aucun hasard, aucun gain possible au-delà de la mise engagée.</p>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script src="js/supabase-client.js?v=2"></script>
+<script src="js/main.js"></script>
+<script src="js/nav-auth.js"></script>
+<script src="js/legal-toc.js"></script>
+</body>
+</html>

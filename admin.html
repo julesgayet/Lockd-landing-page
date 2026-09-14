@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css" />
-<link rel="stylesheet" href="css/admin.css?v=5" />
+<link rel="stylesheet" href="css/admin.css?v=6" />
 </head>
 <body class="admin-body">
 
@@ -51,6 +51,7 @@
         <span class="admin-tab__count" id="disputesCount" hidden>0</span>
       </button>
       <button class="admin-tab" id="tabAccounts" role="tab" aria-selected="false" aria-controls="panelAccounts" type="button">Comptes</button>
+      <button class="admin-tab" id="tabStats" role="tab" aria-selected="false" aria-controls="panelStats" type="button">Statistiques</button>
     </nav>
 
     <section id="panelOverview" role="tabpanel" aria-labelledby="tabOverview">
@@ -124,6 +125,30 @@
         </ul>
       </div>
     </section>
+
+    <section id="panelStats" role="tabpanel" aria-labelledby="tabStats" hidden>
+      <section class="admin-panels">
+        <div class="admin-panel">
+          <div class="admin-panel__head">
+            <h2>Landing page — Comment nous as-tu connus ?</h2>
+            <span class="admin-stats-total" id="statsLandingTotal"></span>
+          </div>
+          <ul class="admin-stats-bars" id="statsLandingBars">
+            <li class="admin-feed__empty">Chargement…</li>
+          </ul>
+        </div>
+
+        <div class="admin-panel">
+          <div class="admin-panel__head">
+            <h2>Application — Comment nous as-tu connus ?</h2>
+            <span class="admin-stats-total" id="statsAppTotal"></span>
+          </div>
+          <ul class="admin-stats-bars" id="statsAppBars">
+            <li class="admin-feed__empty">Chargement…</li>
+          </ul>
+        </div>
+      </section>
+    </section>
   </main>
 </div>
 
@@ -156,5 +181,6 @@
 <script src="js/admin-dashboard.js?v=3"></script>
 <script src="js/admin-disputes.js?v=6"></script>
 <script src="js/admin-accounts.js?v=2"></script>
+<script src="js/admin-stats.js?v=1"></script>
 </body>
 </html>
